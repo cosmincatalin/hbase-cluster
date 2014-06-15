@@ -6,3 +6,13 @@ class { 'packages':
     'openssh-server'
   ]
 }
+
+class { 'usergroup':
+  user    => $user,
+  group   => 'hadoop',
+  require => Class['packages']
+}
+
+class { 'master':
+  baseIp  => $base_ip
+}

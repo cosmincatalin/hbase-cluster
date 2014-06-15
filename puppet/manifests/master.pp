@@ -3,7 +3,6 @@ class { 'packages':
     'vim',
     'libaugeas-ruby',
     'augeas-tools',
-    'ssh',
     'openssh-client'
   ]
 }
@@ -14,13 +13,18 @@ class { 'usergroup':
   require => Class['packages']
 }
 
-class { 'java':
-  user    => $user,
-  require => Class['usergroup']
+class { 'slaves':
+  nodesNumber => $nodes_number,
+  baseIp      => $base_ip
 }
 
-class { 'hadoop':
-  user    => $user,
-  version => '2.4.0',
-  require => Class['usergroup']
-}
+# class { 'java':
+#   user    => $user,
+#   require => Class['usergroup']
+# }
+
+# class { 'hadoop':
+#   user    => $user,
+#   version => '2.4.0',
+#   require => Class['usergroup']
+# }

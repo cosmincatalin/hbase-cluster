@@ -12,6 +12,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   baseIp = '192.168.66.6'
   # The postfix for the machines on the cluster
   baseName = '.cluster.lab'
+  # The path where files are shared between machines
+  sharePath = '/mnt/vshare'
+  # The file name of the shared master key
+  masterKey = 'master_key.pub'
 
   # Trusty Tahr Ubuntu
   config.vm.box = 'ubuntu/trusty64'
@@ -19,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # The puppet folder needs to be shared explicitly for the provisioning to work
   config.vm.synced_folder 'puppet', '/puppet'
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder 'share', '/mnt/vshare', create: true
+  config.vm.synced_folder 'share', sharePath, create: true
 
   # Rise the Master which is the default machine
   config.vm.define :master, primary: true do |master|
@@ -36,8 +40,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.module_path    = 'puppet/modules'
       puppet.options        = '--verbose'
       puppet.facter         = {
-        'user'          => 'hduser',
-        'hadoopVersion' => '2.4.0'
+        'user'            => user,
+        'hadoop_version'  => hadoopVersion,
+        'share_path'      => sharePath,
+        'shared_key'      => masterKey,
+        'nodes_number'    => numberOfDataNodes,
+        'base_ip'         => baseIp
       }
     end
   end
@@ -61,8 +69,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.module_path    = 'puppet/modules'
         puppet.options        = '--verbose'
         puppet.facter         = {
-          'user'          => user,
-          'hadoopVersion' => hadoopVersion
+          'user'            => user,
+          'hadoop_version'  => hadoopVersion,
+          'share_path'      => sharePath,
+          'shared_key'      => masterKey,
+          'base_ip'         => baseIp
         }
       end
     end

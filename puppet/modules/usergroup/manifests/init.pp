@@ -29,6 +29,14 @@ class usergroup($user, $group) {
       user    => 'root',
       require => File["/home/${user}"]
     }
+
+    file { "/home/${user}/env.sh":
+      ensure  => 'present',
+      owner   => $user,
+      mode    => 0700,
+      content => "#!/bin/bash -x\n\n",
+      require => File["/home/${user}"]
+    }
   }
 
 }

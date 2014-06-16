@@ -4,6 +4,7 @@ class hadoop ($user, $version) {
   $domain = 'mirrors.dotsrc.org'
   $path = "/apache/hadoop/common/hadoop-${version}/"
   $file = "hadoop-${version}.tar.gz"
+  $autoJavaHome = '$(readlink -f \/usr\/bin\/javac | sed "s:\/bin\/javac::")'
 
   Exec {
     path  => '/bin:/usr/bin:/sbin',
@@ -28,15 +29,15 @@ class hadoop ($user, $version) {
     require => Exec["extract hadoop-${version}"]
   }
 
-  file { "/home/${user}/hadoop.env":
-    owner   => $user,
-    mode    => 0700,
-    content => template('hadoop/hadoop.env.erb')
+  exec { 'Add JAVA_HOME to hadoop-env.sh':
+    command => "sed -i 's/\${JAVA_HOME}/${autoJavaHome}/' hadoop-env.sh",
+    cwd     => "/home/${user}/hadoop/etc/hadoop",
+    require => File["/home/${user}/hadoop"]
   }
 
-  exec { "Append hadoop env variables to ${user} profile":
-    command => 'cat hadoop.env >> .bashrc && rm hadoop.env',
-    cwd     => "/home/${user}/",
-    require => File["/home/${user}/hadoop.env"]
+  exec { 'format hdfs':
+    command => "/home/${user}/hadoop/bin/hdfs namenode -format",
+    require => Exec['Add JAVA_HOME to hadoop-env.sh']
   }
+
 }

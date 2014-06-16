@@ -26,9 +26,10 @@ class java ($user) {
     }
 
     exec { "install java":
-      command => 'apt-get install -y oracle-java7-installer',
-      require => Exec['accept java oracle licence'],
-      timeout => 1800 # 30 minutes `should be more than enough` to install java
+      command   => 'apt-get install -y oracle-java7-installer',
+      require   => Exec['accept java oracle licence'],
+      logoutput => true,
+      timeout   => 1800 # 30 minutes `should be more than enough`
     }
 
     exec { "add JAVA_HOME to $user profile":

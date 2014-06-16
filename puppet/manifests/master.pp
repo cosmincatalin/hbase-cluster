@@ -13,13 +13,11 @@ class { 'usergroup':
   require => Class['packages']
 }
 
-# Needs indempotence
 class { 'slaves':
   nodesNumber => $nodes_number,
   baseIp      => $base_ip
 }
 
-# Needs indempotence
 class { 'sharekey':
   user        => $user,
   group       => $group,
@@ -28,14 +26,13 @@ class { 'sharekey':
   require => Class['usergroup']
 }
 
-# class { 'java':
-#   user    => $user,
-#   require => Class['usergroup']
-# }
+class { 'java':
+  user    => $user,
+  require => Class['usergroup']
+}
 
-# Needs indempotence
-# class { 'hadoop':
-#   user    => $user,
-#   version => '2.4.0',
-#   require => Class['usergroup']
-# }
+class { 'hadoop':
+  user    => $user,
+  version => '2.4.0',
+  require => Class['usergroup']
+}

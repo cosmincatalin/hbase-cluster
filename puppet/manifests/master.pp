@@ -32,7 +32,8 @@ class { 'java':
 }
 
 class { 'hadoop':
-  user    => $user,
-  version => '2.4.0',
-  require => Class['usergroup']
+  user      => $user,
+  isMaster  => true,
+  version   => '2.4.0',
+  require   => Class['usergroup']
 }

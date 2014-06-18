@@ -18,12 +18,35 @@ class { 'slaves':
   baseIp      => $base_ip
 }
 
-class { 'sharekey':
+ssh::key::generate{ 'generate master key':
+  user    => $user,
+  require => Class['usergroup']
+}
+
+ssh::key::export{ 'copy to shared folder':
   user        => $user,
-  group       => $group,
   shareFolder => $share_path,
   key         => $shared_key,
-  require => Class['usergroup']
+  require     => Ssh::Key::Generate['generate master key']
+}
+
+ssh::key::import{ 'import master key to itself':
+  user        => $user,
+  shareFolder => $share_path,
+  key         => $shared_key,
+  require     => Ssh::Key::Export['copy to shared folder']
+}
+
+ssh::config{ 'login for slaves':
+  user      => $user,
+  host      => 'slave-*',
+  require   => Ssh::Key::Generate['generate master key']
+}
+
+ssh::config{ 'login for master':
+  user      => $user,
+  host      => 'master',
+  require   => Ssh::Key::Generate['generate master key']
 }
 
 class { 'java':
@@ -35,5 +58,5 @@ class { 'hadoop':
   user      => $user,
   isMaster  => true,
   version   => '2.4.0',
-  require   => Class['usergroup']
+  require   => Class['usergroup', 'java']
 }

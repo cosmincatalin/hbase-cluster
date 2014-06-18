@@ -1,5 +1,7 @@
 class hadoop::configure($user) {
 
+  $hadoopConfDir = "/home/${user}/hadoop/etc/hadoop"
+
   Exec {
     user    => $user,
     path  => '/bin:/usr/bin:/sbin'
@@ -13,7 +15,7 @@ class hadoop::configure($user) {
   }
 
   exec { 'truncate slaves first':
-    command => "truncate -s0 ${hadoopConfDir}slaves",
+    command => "truncate -s0 ${hadoopConfDir}/slaves",
     user    => 'root'
   }
 

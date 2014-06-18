@@ -14,8 +14,8 @@ class hadoop::start($user) {
     command => "${hadoopBin}/hdfs namenode -format local.lab"
   }
 
-  exec { 'start hdfs':
-    command => "${hadoopSbin}/hadoop-daemon.sh --config ${hadoopConf} --script hdfs start namenode"
-  }
+  # exec { 'start hdfs':
+  #   command => "${hadoopSbin}/hadoop-daemon.sh --config ${hadoopConf} --script hdfs start namenode"
+  # }
 
 }

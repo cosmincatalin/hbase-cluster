@@ -7,20 +7,19 @@ class { 'packages':
   ]
 }
 
-class { 'usergroup':
+identity::user::add { "Add user ${user}":
   user    => $user,
-  group   => 'hadoop',
-  require => Class['packages']
+  group   => 'hadoop'
 }
 
-class { 'slaves':
+hosts::master2slaves { 'add slaves ips':
   nodesNumber => $nodes_number,
   baseIp      => $base_ip
 }
 
 ssh::key::generate{ 'generate master key':
   user    => $user,
-  require => Class['usergroup']
+  require => Identity::User::Add["Add user ${user}"]
 }
 
 ssh::key::export{ 'copy to shared folder':
@@ -51,12 +50,15 @@ ssh::config{ 'login for master':
 
 class { 'java':
   user    => $user,
-  require => Class['usergroup']
+  require => Identity::User::Add["Add user ${user}"]
 }
 
 class { 'hadoop':
   user      => $user,
   isMaster  => true,
   version   => '2.4.0',
-  require   => Class['usergroup', 'java']
+  require   => [
+    Class['java'],
+    Identity::User::Add["Add user ${user}"]
+  ]
 }

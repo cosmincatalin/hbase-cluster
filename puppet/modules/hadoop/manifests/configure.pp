@@ -8,9 +8,13 @@ class hadoop::configure($user) {
   }
 
   exec { 'Add JAVA_HOME to hadoop-env.sh':
-    # $java_home comes from facter
     command => "sed -i 's/\${JAVA_HOME}/${javaHome}/' hadoop-env.sh",
     cwd     => "/home/${user}/hadoop/etc/hadoop"
+  }
+
+  hadoop::addslaves{ 'add slaves to hadoop configuration':
+    count => 3,
+    user => $user
   }
 
   augeas { 'core-site':

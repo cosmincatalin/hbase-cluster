@@ -1,4 +1,4 @@
-define hosts::slave2master($nodesNumber, $baseIp) {
+define hosts::slave2master($baseIp) {
 
   resources { 'host':
     purge => true

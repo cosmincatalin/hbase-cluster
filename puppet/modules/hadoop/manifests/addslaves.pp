@@ -2,9 +2,10 @@ define hadoop::addslaves($user, $count) {
 
   $hadoopConfDir = "/home/${user}/hadoop/etc/hadoop"
 
-  util::exec { "Add slave-${count} to conf":
+  exec { "Add slave-${count} to conf":
     command => "echo \"slave-${count}\n\" >> ${hadoopConfDir}/slaves",
-    user    => $user
+    user    => $user,
+    path  => '/bin:/usr/bin:/sbin'
   }
 
   $next = inline_template('<%= @count.to_i - 1 %>')

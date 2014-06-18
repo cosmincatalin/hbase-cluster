@@ -2,14 +2,11 @@ class hadoop::configure($user) {
 
   $javaHome = '$(readlink -f \/usr\/bin\/javac | sed "s:\/bin\/javac::")'
 
-  Exec {
-    path  => '/bin:/usr/bin:/sbin',
-    user  => $user
-  }
-
   exec { 'Add JAVA_HOME to hadoop-env.sh':
     command => "sed -i 's/\${JAVA_HOME}/${javaHome}/' hadoop-env.sh",
-    cwd     => "/home/${user}/hadoop/etc/hadoop"
+    cwd     => "/home/${user}/hadoop/etc/hadoop",
+    path  => '/bin:/usr/bin:/sbin',
+    user  => $user
   }
 
   hadoop::addslaves{ 'add slaves to hadoop configuration':

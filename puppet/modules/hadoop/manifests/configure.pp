@@ -1,12 +1,20 @@
 class hadoop::configure($user) {
 
+  Exec {
+    user    => $user,
+    path  => '/bin:/usr/bin:/sbin'
+  }
+
   $javaHome = '$(readlink -f \/usr\/bin\/javac | sed "s:\/bin\/javac::")'
 
   exec { 'Add JAVA_HOME to hadoop-env.sh':
     command => "sed -i 's/\${JAVA_HOME}/${javaHome}/' hadoop-env.sh",
-    cwd     => "/home/${user}/hadoop/etc/hadoop",
-    path  => '/bin:/usr/bin:/sbin',
-    user  => $user
+    cwd     => "/home/${user}/hadoop/etc/hadoop"
+  }
+
+  exec { 'truncate slaves first':
+    command => "truncate -s0 ${hadoopConfDir}slaves",
+    user    => 'root'
   }
 
   hadoop::addslaves{ 'add slaves to hadoop configuration':

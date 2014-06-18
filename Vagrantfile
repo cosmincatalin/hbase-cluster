@@ -29,6 +29,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :master, primary: true do |master|
     # The master is placed at 192.168.66.60
     master.vm.network 'private_network', ip: '192.168.66.60'
+    # Hadoop web apps ports
+    master.vm.network :forwarded_port, guest: 50070, host: 24200
+    master.vm.network :forwarded_port, guest: 50075, host: 24201
+    master.vm.network :forwarded_port, guest: 50090, host: 24202
 
     # The master is called master.cluster.lab
     master.vm.hostname = 'master' + baseName

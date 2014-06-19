@@ -32,7 +32,7 @@ ssh::key::export{ 'copy to shared folder':
 
 ssh::key::import{ 'import master key to itself':
   user        => $user,
-  shareFolder => $share_path,
+  shareDir    => $share_path,
   key         => $shared_key,
   require     => Ssh::Key::Export['copy to shared folder']
 }

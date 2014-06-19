@@ -25,8 +25,7 @@ class hadoop::start($user, $isMaster) {
 
   if !$isMaster {
     exec { 'start datanode':
-      command => "${hadoopDaemon} --script hdfs start datanode",
-      require => Exec['format hdfs']
+      command => "${hadoopDaemon} --script hdfs start datanode"
     }
   }
 

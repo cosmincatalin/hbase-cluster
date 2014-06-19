@@ -13,6 +13,7 @@ class hadoop ($user, $isMaster, $version) {
 
   class { 'hadoop::start':
     user      => $user,
+    isMaster  => $isMaster,
     require   => Class['hadoop::configure']
   }
 

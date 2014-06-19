@@ -1,6 +1,7 @@
 # Take a public key from the common share folder and import it
 # into the hosts's authorized hosts. This way the node to which the key
 # belongs to can connect to the current node.
+# Note: Using shareDir becuase it's shorter than shareFolder
 define ssh::key::import($user, $shareDir, $key) {
 
   file { "/home/${user}/.ssh/authorized_keys":

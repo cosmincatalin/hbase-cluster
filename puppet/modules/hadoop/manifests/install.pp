@@ -12,8 +12,10 @@ class hadoop::install($user, $version) {
   }
 
   exec { "download hadoop-${version}":
-    command => "wget ${protocol}://${domain}${path}${file}",
-    cwd     => "/home/${user}/"
+    command   => "wget ${protocol}://${domain}${path}${file}",
+    cwd       => "/home/${user}/",
+    logoutput => true,
+    timeout   => 1800 # 30 minutes `should be more than enough`
   }
 
   exec { "extract hadoop-${version}":

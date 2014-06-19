@@ -25,7 +25,7 @@ ssh::key::generate{ 'slave key':
 
 ssh::key::import{ 'import master key to slave':
   user        => $user,
-  shareFolder => $share_path,
+  shareDir    => $share_path,
   key         => $shared_key,
   require     => Ssh::Key::Generate['slave key']
 }

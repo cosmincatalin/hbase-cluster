@@ -1,12 +1,8 @@
+# The hosts configuration for a slave that will try to connect to a master
 define hosts::slave2master($baseIp) {
 
   resources { 'host':
     purge => true
-  }
-
-  host { 'add localhost on slave':
-    name  => 'localhost',
-    ip    => '127.0.0.1'
   }
 
   host { 'add master on slave':

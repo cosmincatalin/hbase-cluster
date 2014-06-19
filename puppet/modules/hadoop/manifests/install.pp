@@ -1,3 +1,4 @@
+# Install Hadoop by downloading it, extracting it and linking it
 class hadoop::install($user, $version) {
 
   $protocol = 'http'
@@ -17,14 +18,14 @@ class hadoop::install($user, $version) {
 
   exec { "extract hadoop-${version}":
     command => "tar xvf ${file} && rm ${file}",
-    cwd => "/home/${user}",
+    cwd     => "/home/${user}",
     require => Exec["download hadoop-${version}"]
   }
 
   file { "/home/${user}/hadoop":
-    ensure => 'link',
-    target => "/home/${user}/hadoop-${version}",
-    owner => $user,
+    ensure  => 'link',
+    target  => "/home/${user}/hadoop-${version}",
+    owner   => $user,
     require => Exec["extract hadoop-${version}"]
   }
 

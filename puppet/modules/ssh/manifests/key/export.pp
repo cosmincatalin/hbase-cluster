@@ -1,3 +1,6 @@
+# Move the public key to a folders that is supposed to be shared between
+# the cluster's node. This way, the slaves can import the master's
+# public key
 define ssh::key::export($user, $shareFolder, $key) {
 
   Exec {

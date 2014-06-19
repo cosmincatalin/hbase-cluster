@@ -1,6 +1,7 @@
+# A wrapper for creating a user along with a specified group
 define identity::user::add ($user, $group ) {
 
-  if !($user in $users) {
+  if !($user in $::users) {
 
     identity::group::add{ "Add group ${group}":
       group => $group
@@ -23,7 +24,7 @@ define identity::user::add ($user, $group ) {
     exec { 'config_shell':
       command => "chsh -s /bin/bash ${user}",
       user    => 'root',
-      path  => '/bin:/usr/bin',
+      path    => '/bin:/usr/bin',
       require => File["/home/${user}"]
     }
 

@@ -1,3 +1,4 @@
+# Base class for coordinating setting up Hadoop on a node
 class hadoop ($user, $isMaster, $version) {
 
   class { 'hadoop::install':

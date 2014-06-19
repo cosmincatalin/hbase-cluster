@@ -1,3 +1,5 @@
+# Basic wrapper for installing packages after an initial update.
+# If no packages are specified, it just updates the aptitude repos
 class packages($packages) {
 
   Exec {
@@ -11,7 +13,7 @@ class packages($packages) {
   }
 
   package { $packages:
-    ensure  => "installed",
+    ensure  => 'installed',
     require => Exec['initial update']
   }
 

@@ -1,9 +1,12 @@
+# Configures a Hadoop node. All nodes are born equal from the point
+# of view of the configuration.
 class hadoop::configure($user) {
 
-  $hadoopConfDir = "/home/${user}/hadoop/etc/hadoop"
+  $hadoopConfDir  = "/home/${user}/hadoop/etc/hadoop"
+  $propertyPath   = 'configuration/property'
 
   Exec {
-    user    => $user,
+    user  => $user,
     path  => '/bin:/usr/bin:/sbin'
   }
 
@@ -21,30 +24,30 @@ class hadoop::configure($user) {
 
   hadoop::addslaves{ 'add slaves to hadoop configuration':
     count => 3,
-    user => $user
+    user  => $user
   }
 
   augeas { 'core-site':
-    incl  => "/home/${user}/hadoop/etc/hadoop/core-site.xml",
-    lens  => 'Xml.lns',
+    incl    => "/home/${user}/hadoop/etc/hadoop/core-site.xml",
+    lens    => 'Xml.lns',
     changes => [
-      "set configuration/property[last()+1]/name/#text 'fs.defaultFS'",
-      "set configuration/property[last()]/value/#text 'hdfs://master:54310'",
-      "set configuration/property[last()+1]/name/#text 'mapreduce.jobtracker.address'",
-      "set configuration/property[last()]/value/#text 'master:54311'",
-      "set configuration/property[last()+1]/name/#text 'hadoop.tmp.dir'",
-      "set configuration/property[last()]/value/#text '/home/${user}/hadoop/tmp'"
+      "set ${propertyPath}[last()+1]/name/#text 'fs.defaultFS'",
+      "set ${propertyPath}[last()]/value/#text 'hdfs://master:8020'",
+      "set ${propertyPath}[last()+1]/name/#text 'hadoop.tmp.dir'",
+      "set ${propertyPath}[last()]/value/#text '/home/${user}/hadoop/tmp'"
     ]
   }
 
   augeas { 'hdfs-site':
-    incl  => "/home/${user}/hadoop/etc/hadoop/hdfs-site.xml",
-    lens  => 'Xml.lns',
+    incl    => "/home/${user}/hadoop/etc/hadoop/hdfs-site.xml",
+    lens    => 'Xml.lns',
     changes => [
-      "set configuration/property[last()+1]/name/#text 'dfs.replication'",
-      "set configuration/property[last()]/value/#text '2'",
-      "set configuration/property[last()+1]/name/#text 'dfs.datanode.data.dir'",
-      "set configuration/property[last()]/value/#text '/home/${user}/hadoop/data'"
+      "set ${propertyPath}[last()+1]/name/#text 'dfs.replication'",
+      "set ${propertyPath}[last()]/value/#text '2'",
+      "set ${propertyPath}[last()+1]/name/#text 'dfs.datanode.data.dir'",
+      "set ${propertyPath}[last()]/value/#text '/home/${user}/hadoop/data'",
+      "set ${propertyPath}[last()+1]/name/#text 'dfs.namenode.name.dir'",
+      "set ${propertyPath}[last()]/value/#text '/home/${user}/hadoop/namenode'"
     ]
   }
 }

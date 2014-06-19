@@ -19,6 +19,7 @@ hosts::master2slaves { 'add slaves ips':
 
 ssh::key::generate{ 'generate master key':
   user    => $user,
+  group   => 'hadoop',
   require => Identity::User::Add["Add user ${user}"]
 }
 

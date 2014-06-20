@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   masterKey = 'master_key.pub'
 
   # Trusty Tahr Ubuntu
-  config.vm.box = 'ubuntu/trusty64'
+  config.vm.box = 'ubuntu/trusty32'
 
   # The puppet folder needs to be shared explicitly for the provisioning to work
   config.vm.synced_folder 'puppet', '/puppet'
@@ -29,10 +29,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :master, primary: true do |master|
     # The master is placed at 192.168.66.60
     master.vm.network 'private_network', ip: '192.168.66.60'
-    # Hadoop web apps ports
+    # NameNode
     master.vm.network :forwarded_port, guest: 50070, host: 24200
-    master.vm.network :forwarded_port, guest: 50075, host: 24201
-    master.vm.network :forwarded_port, guest: 50090, host: 24202
+    # Resource Manager
+    master.vm.network :forwarded_port, guest: 8088, host: 24201
+    # MapReduce JobHistory Server
+    master.vm.network :forwarded_port, guest: 19888, host: 24202
 
     # The master is called master.cluster.lab
     master.vm.hostname = 'master' + baseName

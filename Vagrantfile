@@ -39,6 +39,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # The master is called master.cluster.lab
     master.vm.hostname = 'master' + baseName
 
+    master.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+    end
+
     # start the actual provisioning of the master
     master.vm.provision :puppet do |puppet|
       puppet.manifests_path = 'puppet/manifests'

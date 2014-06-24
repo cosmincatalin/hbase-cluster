@@ -6,7 +6,7 @@
 
 ## Overview
 
-Use this ready-made cluster as your starting point to experimenting with Hadoop 2.4. You have total freedom in modifying it to match your needs while having a solid foundation to strat with.
+Use this ready-made cluster as your starting point to experimenting with Hadoop 2.4. You have total freedom in modifying it to match your needs while having a solid foundation to start with.
 
 ## Quick start
 
@@ -31,7 +31,7 @@ You'll need about **6 GB of RAM** in the default configuration. The cluster was 
 
 ## The long story
 
-For whomever wants to understand what actually goes on behind the scenes, here is an explination of the software stack and the architecture of which the Hadoop cluster is made of.
+For whomever wants to understand what actually goes on behind the scenes, here is an explanation of the software stack and the architecture of which the Hadoop cluster is made of.
 
 #### VirtualBox
 
@@ -39,8 +39,8 @@ VirtualBox is a popular software package used for creating virtual machines. It 
 
 ##### Vagrant
 
-Vagrant is an utility that levreages the API of VirtualBox for the creation of virtual machines. Vagrant can be plugged in with different *provisioners* that configure the virtual machines.
+Vagrant is an utility that leverages the API of VirtualBox for the creation of virtual machines. Vagrant can be plugged in with different *provisioners* that configure the virtual machines.
 
 ##### Puppet
 
-Enter Puppet, which is currently the de-facto industry standard for system configuration automatization. Vagrant uses the power of Puppet to configure the Hadoop cluster. Puppet is a **Ruby DSL**
+Enter Puppet, which is currently the de-facto industry standard for system configuration automation. Vagrant uses the power of Puppet to configure the Hadoop cluster. Puppet is a **Ruby DSL**

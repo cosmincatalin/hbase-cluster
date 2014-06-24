@@ -69,9 +69,9 @@ The slaves are launched after the master and they immediately connect to it. I w
 
 The cluster exposes three web applications that can help when working with Hadoop:
 
-* [Namenode](http://localhost::24200)
-* [Resource Manager](http://localhost:24201)
-* [MapReduce JobHistory Server](http://localhost:24202)
+* NameNode - [http://localhost:24200](http://localhost:24200)
+* Task Manager - [http://localhost:24201](http://localhost:24201)
+* Job History Manager - [http://localhost:24202](http://localhost:24202)
 
 ##### Feedback
 

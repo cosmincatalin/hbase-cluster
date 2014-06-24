@@ -22,8 +22,6 @@ You'll need about **6 GB of RAM** in the default configuration. The cluster was 
 
 ##### Installation
 
-![MyVideo](http://www.youtube.com/watch?v=-m3N_BnVdOI)
-
 * Open a new terminal.
 * Download the configuration by issuing `git clone git@github.com:cosmincatalin/hadoop-cluser.git`.
 * Go into the **hadoop-cluster** directory.

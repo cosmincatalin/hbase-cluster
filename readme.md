@@ -12,7 +12,7 @@ Use this ready-made cluster as your starting point to experimenting with Hadoop 
 
 You'll need about **6 GB of RAM** in the default configuration. The cluster was tested on **Linux**, **Mac OS** and **Windows**.
 
-###### Dependencies
+##### Dependencies
 
 1. [Vagrant](http://www.vagrantup.com/downloads.html)
 2. [Git](http://git-scm.com/downloads)
@@ -20,7 +20,9 @@ You'll need about **6 GB of RAM** in the default configuration. The cluster was 
 
 *Virtualization needs to be enabled in BIOS. You probably have this enabled, but if things go awry, this might be the problem.*
 
-###### Start the cluster
+##### Installation
+
+![MyVideo](http://www.youtube.com/watch?v=-m3N_BnVdOI)
 
 * Open a new terminal.
 * Download the configuration by issuing `git clone git@github.com:cosmincatalin/hadoop-cluser.git`.

@@ -43,4 +43,36 @@ Vagrant is an utility that leverages the API of VirtualBox for the creation of v
 
 ##### Puppet
 
-Enter Puppet, which is currently the de-facto industry standard for system configuration automation. Vagrant uses the power of Puppet to configure the Hadoop cluster. Puppet is a **Ruby DSL**
+Enter Puppet, which is currently the de-facto industry standard for system configuration automation. Vagrant uses the power of Puppet to configure the Hadoop cluster. Puppet is a **Ruby DSL**.
+
+###### Workflow
+
+All the configurations of the Hadoop cluster are a series of modules chained together in a series of dependencies.
+
+The first virtual machine that gets created first is the master node of the cluster. The actions that happen on master are as follows:
+
+* Installation of necessary software packages
+* User and group creation
+* SSH setup
+* Hosts setup
+* Java installation
+* Hadoop download
+* Hadoop installation
+* Hadoop configuration
+* Hadoop initialisation
+
+For more in-depth details of what happens, refer to the source code.
+
+The slaves are configured in a very similar way to the master. One of the differences is that the slaves import the master's SSH key into their authorised hosts. Also, their hosts file is simplified, as they only need to address the master.
+
+The slaves are launched after the master and they immediately connect to it. I will probably add some sample jobs to show how the cluster can be used.
+
+The cluster exposes three web applications that can help when working with Hadoop:
+
+* [Namenode](http://localhost::24200)
+* [Resource Manager](http://localhost:24201)
+* [MapReduce JobHistory Server](http://localhost:24202)
+
+##### Feedback
+
+Please don't hesistate to provide feedback. This cluster will soon be enlarged with the likes of **Zookeeper**, **Hbase**, **Sqoop**, etc.

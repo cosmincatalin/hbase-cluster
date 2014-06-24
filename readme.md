@@ -1,6 +1,6 @@
 # Launch a Hadoop cluster on your own workstation
 
-![Mou icon](http://upload.wikimedia.org/wikipedia/commons/0/0e/Hadoop_logo.svg)
+![Hadoop logo](http://upload.wikimedia.org/wikipedia/commons/0/0e/Hadoop_logo.svg)
 
 > **Hadoop 2.4** fully **distributed cluster** with **only 3 dependencies**
 

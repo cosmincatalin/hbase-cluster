@@ -10,7 +10,7 @@ identity::user::add { "Add user ${user}":
 }
 
 hosts::zookeepers { 'add zookeepers ips':
-  nodesNumber => $nodes_number,
+  nodesNumber => $cluster_size,
   baseIp      => $base_ip
 }
 

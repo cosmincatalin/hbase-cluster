@@ -1,4 +1,4 @@
-# A recursive type for adding avariable amount of slave hostnames to
+# A recursive type for adding a variable amount of slave hostnames to
 # the hosts file
 define hosts::addslaves($count, $base) {
   host { "slave-${count}":

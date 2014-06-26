@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # The puppet folder needs to be shared explicitly for the provisioning to work
   config.vm.synced_folder 'puppet', '/puppet'
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder '.', '/vagrant', disabled: true
   config.vm.synced_folder 'share', sharePath, create: true
 
   # Rise the Zookeeper

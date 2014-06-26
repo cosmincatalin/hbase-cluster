@@ -44,7 +44,7 @@ class { 'java':
 class { 'hadoop':
   user      => $user,
   isMaster  => false,
-  version   => '2.4.0',
+  version   => $hadoop_version,
   require   => [
     Class['java'],
     Identity::User::Add["Add user ${user}"]

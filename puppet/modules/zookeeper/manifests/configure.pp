@@ -18,7 +18,7 @@ class zookeeper::configure($user, $serverId, $clusterSize) {
   file { "/home/${user}/zookeeper/data/myid":
     owner   => $user,
     require => File["/home/${user}/zookeeper/data"],
-    content => $serverId
+    content => "${serverId}"
   }
 
   file { "/home/${user}/zookeeper/conf/zoo.cfg":

@@ -16,7 +16,7 @@ class zookeeper::start($user) {
 
   exec { 'start zookeeper':
     command => "/home/${user}/zookeeper/bin/zkServer.sh start",
-    path    => "/home/${user}/zookeeper/bin"
+    cwd    => "/home/${user}/zookeeper/bin"
   }
 
 }

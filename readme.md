@@ -1,4 +1,4 @@
-# Launch an HBase cluster on your own workstation
+## Launch an HBase cluster on your own workstation
 
 ![Hbase logo](http://archive.cloudera.com/cdh4/cdh/4/hbase-0.94.2-cdh4.2.0/images/hbase_logo.png)
 

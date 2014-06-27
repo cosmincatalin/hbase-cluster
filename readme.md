@@ -1,16 +1,16 @@
-# Launch a Hadoop cluster on your own workstation
+# Launch an HBase cluster on your own workstation
 
-![Hadoop logo](http://upload.wikimedia.org/wikipedia/commons/0/0e/Hadoop_logo.svg)
+![Hbase logo](http://archive.cloudera.com/cdh4/cdh/4/hbase-0.94.2-cdh4.2.0/images/hbase_logo.png)
 
-> **Hadoop 2.4** fully **distributed cluster** with **only 3 dependencies**
+> **HBase 0.98.3** fully **distributed cluster** with **only 3 dependencies**
 
 ## Overview
 
-Use this ready-made cluster as your starting point to experimenting with Hadoop 2.4. You have total freedom in modifying it to match your needs while having a solid foundation to start with.
+Use this ready-made cluster as your starting point to experimenting with HBase 0.98.3. You have total freedom in modifying it to match your needs while having a solid foundation to start with.
 
 ## Quick start
 
-You'll need about **6 GB of RAM** in the default configuration. The cluster was tested on **Linux**, **Mac OS** and **Windows**.
+You'll need about **8 GB of RAM** in the default configuration. 7 virtual machines will be created. The cluster was tested on **Linux**, **Mac OS** and **Windows**.
 
 ##### Dependencies
 
@@ -23,8 +23,8 @@ You'll need about **6 GB of RAM** in the default configuration. The cluster was 
 ##### Installation
 
 * Open a new terminal.
-* Download the configuration by issuing `git clone git@github.com:cosmincatalin/hadoop-cluser.git`.
-* Go into the **hadoop-cluster** directory.
+* Download the configuration by issuing `git clone git@github.com:cosmincatalin/hbase-cluster.git`.
+* Go into the **hbase-cluster** directory.
 * Issue the magical `vagrant up`
 * Go make yourself a tea, it can take anywhere between 10 minutes to 40 minutes, depending on your internet connection speed.
 * Cluster is ready waiting for something to do.

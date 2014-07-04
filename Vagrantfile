@@ -56,6 +56,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           'zookeeper_version'   => zookeeperVersion,
           'cluster_size'        => zookeeperClusterSize,
           'server_id'           => index,
+          'share_path'          => sharePath,
           'base_ip'             => zookeeperBaseIp
         }
       end

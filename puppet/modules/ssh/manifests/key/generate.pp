@@ -4,7 +4,8 @@ define ssh::key::generate($user, $group) {
   exec { 'Generate common public key':
     command => "ssh-keygen -t rsa -P '' -f /home/${user}/.ssh/id_dsa",
     user    => $user,
-    path    => '/bin:/usr/bin:/sbin'
+    path    => '/bin:/usr/bin:/sbin',
+    onlyif  => "test ! -f /home/${user}/.ssh/id_dsa"
   }
 
   file { "/home/${user}/.ssh/config":

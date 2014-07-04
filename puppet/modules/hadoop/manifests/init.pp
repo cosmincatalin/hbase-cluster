@@ -1,9 +1,10 @@
 # Base class for coordinating setting up Hadoop on a node
-class hadoop ($user, $isMaster, $version) {
+class hadoop ($user, $isMaster, $version, $shareFolder) {
 
   class { 'hadoop::install':
-    user      => $user,
-    version   => $version
+    user        => $user,
+    version     => $version,
+    shareFolder => $shareFolder
   }
 
   class { 'hadoop::configure':

@@ -8,8 +8,8 @@ class { 'packages':
 }
 
 identity::user::add { "Add user ${user}":
-  user    => $user,
-  group   => 'hadoop'
+  user        => $user,
+  group       => 'hadoop'
 }
 
 hosts::master2slaves { 'add slaves ips':
@@ -54,12 +54,15 @@ class { 'java':
   require => Identity::User::Add["Add user ${user}"]
 }
 
-class { 'hadoop':
-  user      => $user,
-  isMaster  => true,
-  version   => $hadoop_version,
-  require   => [
-    Class['java'],
-    Identity::User::Add["Add user ${user}"]
-  ]
+if $::reource_manager_running == 'true' {
+  class { 'hadoop':
+    user        => $user,
+    isMaster    => true,
+    version     => $hadoop_version,
+    shareFolder => $share_path,
+    require   => [
+      Class['java'],
+      Identity::User::Add["Add user ${user}"]
+    ]
+  }
 }

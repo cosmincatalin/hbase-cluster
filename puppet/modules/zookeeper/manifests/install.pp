@@ -1,5 +1,5 @@
 # Install Hadoop by downloading it, extracting it and linking it
-class zookeeper::install($user, $version) {
+class zookeeper::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
   $domain = 'mirrors.dotsrc.org'
@@ -13,14 +13,15 @@ class zookeeper::install($user, $version) {
 
   exec { "download zookeeper-${version}":
     command   => "wget ${protocol}://${domain}${path}${file}",
-    cwd       => "/home/${user}/",
+    cwd       => $shareFolder,
     logoutput => true,
-    timeout   => 1800 # 30 minutes `should be more than enough`
+    timeout   => 1800, # 30 minutes `should be more than enough`
+    onlyif    => "test ! -f ${$shareFolder}/${file}"
   }
 
   exec { "extract zookeeper-${version}":
-    command => "tar xvf ${file} && rm ${file}",
-    cwd     => "/home/${user}",
+    command => "tar -xvf ${file} -C /home/${user}",
+    cwd     => $shareFolder,
     require => Exec["download zookeeper-${version}"]
   }
 

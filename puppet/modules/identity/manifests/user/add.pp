@@ -1,5 +1,5 @@
 # A wrapper for creating a user along with a specified group
-define identity::user::add ($user, $group ) {
+define identity::user::add ($user, $group) {
 
   if !($user in $::users) {
 

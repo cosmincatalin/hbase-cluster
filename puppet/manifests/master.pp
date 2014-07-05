@@ -54,15 +54,13 @@ class { 'java':
   require => Identity::User::Add["Add user ${user}"]
 }
 
-if $::reource_manager_running == 'true' {
-  class { 'hadoop':
-    user        => $user,
-    isMaster    => true,
-    version     => $hadoop_version,
-    shareFolder => $share_path,
-    require   => [
-      Class['java'],
-      Identity::User::Add["Add user ${user}"]
-    ]
-  }
+class { 'hadoop':
+  user        => $user,
+  isMaster    => true,
+  version     => $hadoop_version,
+  shareFolder => $share_path,
+  require   => [
+    Class['java'],
+    Identity::User::Add["Add user ${user}"]
+  ]
 }

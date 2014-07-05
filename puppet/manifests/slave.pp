@@ -41,15 +41,13 @@ class { 'java':
   require => Identity::User::Add["Add user ${user}"]
 }
 
-if $::node_manager_running == 'true' {
-  class { 'hadoop':
-    user        => $user,
-    isMaster    => false,
-    version     => $hadoop_version,
-    shareFolder => $share_path,
-    require     => [
-      Class['java'],
-      Identity::User::Add["Add user ${user}"]
-    ]
-  }
+class { 'hadoop':
+  user        => $user,
+  isMaster    => false,
+  version     => $hadoop_version,
+  shareFolder => $share_path,
+  require     => [
+    Class['java'],
+    Identity::User::Add["Add user ${user}"]
+  ]
 }

@@ -1,7 +1,9 @@
 # Base class for coordinating setting up Hadoop on a node
 class zookeeper ($user, $version, $serverId, $clusterSize, $shareFolder) {
 
-  if $::quorum_running == 'true' {
+  $zookeeperIsNotRunning = $::quorum_running != 'true'
+
+  if  $zookeeperIsNotRunning {
     class { 'zookeeper::install':
       user        => $user,
       version     => $version,

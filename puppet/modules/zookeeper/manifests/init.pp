@@ -1,5 +1,5 @@
 # Base class for coordinating setting up Hadoop on a node
-class zookeeper ($user, $version, $serverId, $clusterSize, $shareFolder) {
+class zookeeper ($user, $version, $serverId, $zookeeperEnsembleSize, $shareFolder) {
 
   $zookeeperIsNotRunning = $::quorum_running != 'true'
 
@@ -11,15 +11,15 @@ class zookeeper ($user, $version, $serverId, $clusterSize, $shareFolder) {
     }
 
     class { 'zookeeper::configure':
-      user        => $user,
-      serverId    => $serverId,
-      clusterSize => $clusterSize,
-      require     => Class['zookeeper::install']
+      user                  => $user,
+      serverId              => $serverId,
+      zookeeperEnsembleSize => $zookeeperEnsembleSize,
+      require               => Class['zookeeper::install']
     }
 
     class { 'zookeeper::start':
-      user      => $user,
-      require   => Class['zookeeper::configure']
+      user    => $user,
+      require => Class['zookeeper::configure']
     }
   }
 }

@@ -1,5 +1,5 @@
 # The master configuration for the hosts when connecting to the slaves
-define hosts::master2slaves($nodesNumber, $baseIp) {
+define hosts::master2slaves($hadoopClusterSize, $baseIp) {
 
   resources { 'host':
     purge => true
@@ -10,8 +10,8 @@ define hosts::master2slaves($nodesNumber, $baseIp) {
     ip    => "${baseIp}0"
   }
 
-  hosts::addslaves { "add slave-${nodesNumber}":
-    count   => $nodesNumber,
-    base    => $baseIp
+  hosts::addslaves { "add slave-${hadoopClusterSize}":
+    count => $hadoopClusterSize,
+    base  => $baseIp
   }
 }

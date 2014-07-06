@@ -3,15 +3,17 @@ VAGRANTFILE_API_VERSION = '2'
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # The number of Hadoop Data Nodes to raise
-  numberOfDataNodes = 3
+  hadoopClusterSize = 3
   # The number of nodes in the Zookeeper cluster
-  zookeeperClusterSize = 3
+  zookeeperEnsembleSize = 3
   # The user under which all Hadoop services will run under
   user = 'hduser'
   # The Hadoop version
   hadoopVersion = '2.4.0'
   # The Zookeeper version
   zookeeperVersion = '3.4.6'
+  # The HBase version
+  hbaseVersion = '0.98.3'
   # The cluster will be raised on a private network form the non-addressable set
   baseIp = '192.168.66.'
   # The Hadoop base ip
@@ -34,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder 'share', sharePath, create: true
 
   # Rise the Zookeeper
-  1.upto(zookeeperClusterSize) do |index|
+  1.upto(zookeeperEnsembleSize) do |index|
     # The nodes are identified as zookeeper-*
     nodeName = 'zookeeper-' + index.to_s
 
@@ -52,12 +54,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.module_path    = 'puppet/modules'
         puppet.options        = '--verbose'
         puppet.facter         = {
-          'user'                => user,
-          'zookeeper_version'   => zookeeperVersion,
-          'cluster_size'        => zookeeperClusterSize,
-          'server_id'           => index,
-          'share_path'          => sharePath,
-          'base_ip'             => zookeeperBaseIp
+          'user'                    => user,
+          'zookeeper_version'       => zookeeperVersion,
+          'zookeeper_ensemble_size' => zookeeperEnsembleSize,
+          'server_id'               => index,
+          'share_path'              => sharePath,
+          'base_ip'                 => zookeeperBaseIp
         }
       end
     end
@@ -73,7 +75,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     master.vm.network :forwarded_port, guest: 8088, host: 24201
     # MapReduce JobHistory Server
     master.vm.network :forwarded_port, guest: 19888, host: 24202
-
+    # HBase Master
+    master.vm.network :forwarded_port, guest: 60010, host: 24203
     # The master is called master.cluster.lab
     master.vm.hostname = 'master' + baseName
 
@@ -88,18 +91,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.module_path    = 'puppet/modules'
       puppet.options        = '--verbose'
       puppet.facter         = {
-        'user'            => user,
-        'hadoop_version'  => hadoopVersion,
-        'share_path'      => sharePath,
-        'shared_key'      => masterKey,
-        'nodes_number'    => numberOfDataNodes,
-        'base_ip'         => hadoopBaseIp
+        'user'                    => user,
+        'hadoop_version'          => hadoopVersion,
+        'hbase_version'           => hbaseVersion,
+        'share_path'              => sharePath,
+        'shared_key'              => masterKey,
+        'hadoop_cluster_size'     => hadoopClusterSize,
+        'zookeeper_ensemble_size' => zookeeperEnsembleSize,
+        'base_ip'                 => hadoopBaseIp
       }
     end
   end
 
   # Rise the Data Nodes
-  1.upto(numberOfDataNodes) do |index|
+  1.upto(hadoopClusterSize) do |index|
     # The slaves are identified as slave-*
     nodeName = 'slave-' + index.to_s
 
@@ -117,11 +122,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.module_path    = 'puppet/modules'
         puppet.options        = '--verbose'
         puppet.facter         = {
-          'user'            => user,
-          'hadoop_version'  => hadoopVersion,
-          'share_path'      => sharePath,
-          'shared_key'      => masterKey,
-          'base_ip'         => hadoopBaseIp
+          'user'                    => user,
+          'hadoop_version'          => hadoopVersion,
+          'hbase_version'           => hbaseVersion,
+          'share_path'              => sharePath,
+          'shared_key'              => masterKey,
+          'hadoop_cluster_size'     => hadoopClusterSize,
+          'zookeeper_ensemble_size' => zookeeperEnsembleSize,
+          'base_ip'                 => hadoopBaseIp
         }
       end
     end

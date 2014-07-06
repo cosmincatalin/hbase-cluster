@@ -51,3 +51,13 @@ class { 'hadoop':
     Identity::User::Add["Add user ${user}"]
   ]
 }
+
+class { 'hbase':
+  user                  => $user,
+  isMaster              => false,
+  version               => $hbase_version,
+  shareFolder           => $share_path,
+  hadoopClusterSize     => $hadoop_cluster_size,
+  zookeeperEnsembleSize => $zookeeper_ensemble_size,
+  require               => Class['hadoop']
+}

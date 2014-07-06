@@ -1,13 +1,6 @@
 # Configures a Zookeeper server. All nodes are born equal from the point
 # of view of the configuration.
-class zookeeper::configure($user, $serverId, $clusterSize) {
-
-  notice("Cluster size: ${clusterSize}")
-
-  Exec {
-    user  => $user,
-    path  => '/bin:/usr/bin:/sbin'
-  }
+class zookeeper::configure($user, $serverId, $zookeeperEnsembleSize) {
 
   # Ensure a specific folder structure
   file { "/home/${user}/zookeeper/data":

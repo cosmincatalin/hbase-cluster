@@ -8,13 +8,13 @@ class { 'packages':
 }
 
 identity::user::add { "Add user ${user}":
-  user        => $user,
-  group       => 'hadoop'
+  user  => $user,
+  group => 'hadoop'
 }
 
 hosts::master2slaves { 'add slaves ips':
-  nodesNumber => $nodes_number,
-  baseIp      => $base_ip
+  hadoopClusterSize => $hadoop_cluster_size,
+  baseIp            => $base_ip
 }
 
 ssh::key::generate{ 'generate master key':
@@ -63,4 +63,14 @@ class { 'hadoop':
     Class['java'],
     Identity::User::Add["Add user ${user}"]
   ]
+}
+
+class { 'hbase':
+  user                  => $user,
+  isMaster              => true,
+  version               => $hbase_version,
+  shareFolder           => $share_path,
+  hadoopClusterSize     => $hadoop_cluster_size,
+  zookeeperEnsembleSize => $zookeeper_ensemble_size,
+  require               => Class['hadoop']
 }

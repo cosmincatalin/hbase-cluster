@@ -8,12 +8,14 @@ class { 'packages':
 }
 
 identity::user::add { "Add user ${user}":
-  user    => $user,
-  group   => 'hadoop'
+  user  => $user,
+  group => 'hadoop'
 }
 
 hosts::slave2master { 'add master ip':
-  baseIp      => $base_ip
+  hadoopBaseIp          => $hadoop_base_ip,
+  zookeeperEnsembleSize => $zookeeper_ensemble_size,
+  zookeeperBaseIp       => $zookeeper_base_ip
 }
 
 # @todo: Refactor the dependencies so that this doesn't get called
@@ -24,10 +26,10 @@ ssh::key::generate{ 'slave key':
 }
 
 ssh::key::import{ 'import master key to slave':
-  user        => $user,
-  shareDir    => $share_path,
-  key         => $shared_key,
-  require     => Ssh::Key::Generate['slave key']
+  user      => $user,
+  shareDir  => $share_path,
+  key       => $shared_key,
+  require   => Ssh::Key::Generate['slave key']
 }
 
 ssh::config{ 'login for slaves':

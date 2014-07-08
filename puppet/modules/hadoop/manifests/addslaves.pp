@@ -11,7 +11,7 @@ define hadoop::addslaves($user, $count) {
 
   $next = inline_template('<%= @count.to_i - 1 %>')
   if $next != '0' {
-    hadoop::addslaves { "add slave-${next}":
+    hadoop::addslaves { "add slave-${next} to slaves file":
       count => $next,
       user  => $user
     }

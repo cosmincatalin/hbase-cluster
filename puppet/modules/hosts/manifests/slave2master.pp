@@ -1,5 +1,5 @@
 # The hosts configuration for a slave that will try to connect to a master
-define hosts::slave2master($baseIp) {
+define hosts::slave2master($hadoopBaseIp, $zookeeperEnsembleSize, $zookeeperBaseIp) {
 
   resources { 'host':
     purge => true
@@ -7,6 +7,11 @@ define hosts::slave2master($baseIp) {
 
   host { 'add master on slave':
     name  => 'master',
-    ip    => "${baseIp}0"
+    ip    => "${hadoopBaseIp}0"
+  }
+
+  hosts::addzookeepers { "add zookeeper-${zookeeperEnsembleSize}":
+    count => $zookeeperEnsembleSize,
+    base  => $zookeeperBaseIp
   }
 }

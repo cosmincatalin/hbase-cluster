@@ -76,7 +76,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # MapReduce JobHistory Server
     master.vm.network :forwarded_port, guest: 19888, host: 24202
     # HBase Master
-    master.vm.network :forwarded_port, guest: 60010, host: 24203
+    master.vm.network :forwarded_port, guest: 6010, host: 24203
+
     # The master is called master.cluster.lab
     master.vm.hostname = 'master' + baseName
 
@@ -98,7 +99,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         'shared_key'              => masterKey,
         'hadoop_cluster_size'     => hadoopClusterSize,
         'zookeeper_ensemble_size' => zookeeperEnsembleSize,
-        'base_ip'                 => hadoopBaseIp
+        'hadoop_base_ip'          => hadoopBaseIp,
+        'zookeeper_base_ip'       => zookeeperBaseIp
       }
     end
   end
@@ -129,7 +131,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           'shared_key'              => masterKey,
           'hadoop_cluster_size'     => hadoopClusterSize,
           'zookeeper_ensemble_size' => zookeeperEnsembleSize,
-          'base_ip'                 => hadoopBaseIp
+          'hadoop_base_ip'          => hadoopBaseIp,
+          'zookeeper_base_ip'       => zookeeperBaseIp
         }
       end
     end

@@ -13,8 +13,10 @@ identity::user::add { "Add user ${user}":
 }
 
 hosts::master2slaves { 'add slaves ips':
-  hadoopClusterSize => $hadoop_cluster_size,
-  baseIp            => $base_ip
+  hadoopClusterSize     => $hadoop_cluster_size,
+  hadoopBaseIp          => $hadoop_base_ip,
+  zookeeperEnsembleSize => $zookeeper_ensemble_size,
+  zookeeperBaseIp       => $zookeeper_base_ip
 }
 
 ssh::key::generate{ 'generate master key':

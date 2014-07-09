@@ -12,10 +12,11 @@ identity::user::add { "Add user ${user}":
   group => 'hadoop'
 }
 
-hosts::slave2master { 'add master ip':
+hosts::slave2master { 'add ips':
   hadoopBaseIp          => $hadoop_base_ip,
   zookeeperEnsembleSize => $zookeeper_ensemble_size,
-  zookeeperBaseIp       => $zookeeper_base_ip
+  zookeeperBaseIp       => $zookeeper_base_ip,
+  hadoopClusterSize     => $hadoop_cluster_size
 }
 
 # @todo: Refactor the dependencies so that this doesn't get called

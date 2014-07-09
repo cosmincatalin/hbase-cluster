@@ -31,7 +31,7 @@ class hbase::configure($user, $zookeeperEnsembleSize, $hadoopClusterSize) {
   }
 
   exec { 'Set HBASE_CLASSPATH in hbase-env.sh':
-    command => "sed -i 's/# export HBASE_CLASSPATH=\\/export HBASE_CLASSPATH=\\/home/\\/${user}\\/hadoop\\/etc\\/hadoop/' hbase-env.sh"
+    command => "sed -i 's/# export HBASE_CLASSPATH=/export HBASE_CLASSPATH=\\/home\\/${user}\\/hadoop\\/etc\\/hadoop/' hbase-env.sh"
   }
 
   exec { 'truncate regionservers file':

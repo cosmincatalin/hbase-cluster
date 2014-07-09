@@ -33,7 +33,7 @@ You'll need about **8 GB of RAM** in the default configuration. 7 virtual machin
 
 For whomever wants to understand what actually goes on behind the scenes, here is an explanation of the software stack and the architecture of which the Hadoop cluster is made of.
 
-#### VirtualBox
+##### VirtualBox
 
 VirtualBox is a popular software package used for creating virtual machines. It is **free to use** and exposes an API for working with it. VirtualBox is the foundation of the Hadoop cluster.
 
@@ -45,33 +45,14 @@ Vagrant is an utility that leverages the API of VirtualBox for the creation of v
 
 Enter Puppet, which is currently the de-facto industry standard for system configuration automation. Vagrant uses the power of Puppet to configure the Hadoop cluster. Puppet is a **Ruby DSL**.
 
-###### Workflow
+##### Web Apps
 
-All the configurations of the Hadoop cluster are a series of modules chained together in a series of dependencies.
-
-The first virtual machine that gets created first is the master node of the cluster. The actions that happen on master are as follows:
-
-* Installation of necessary software packages
-* User and group creation
-* SSH setup
-* Hosts setup
-* Java installation
-* Hadoop download
-* Hadoop installation
-* Hadoop configuration
-* Hadoop initialisation
-
-For more in-depth details of what happens, refer to the source code.
-
-The slaves are configured in a very similar way to the master. One of the differences is that the slaves import the master's SSH key into their authorised hosts. Also, their hosts file is simplified, as they only need to address the master.
-
-The slaves are launched after the master and they immediately connect to it. I will probably add some sample jobs to show how the cluster can be used.
-
-The cluster exposes three web applications that can help when working with Hadoop:
+The cluster exposes three web applications that can help when working with Hadoop and HBase:
 
 * NameNode - [http://localhost:24200](http://localhost:24200)
 * Task Manager - [http://localhost:24201](http://localhost:24201)
 * Job History Manager - [http://localhost:24202](http://localhost:24202)
+* HBase master - [http://localhost:24203](http://localhost:24203)
 
 ##### Feedback
 

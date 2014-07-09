@@ -14,10 +14,10 @@ class hbase ($user, $isMaster, $version, $shareFolder, $zookeeperEnsembleSize, $
     require               => Class['hbase::install']
   }
 
-  class { 'hbase::start':
-    user      => $user,
-    isMaster  => $isMaster,
-    require   => Class['hbase::configure']
-  }
+  # class { 'hbase::start':
+  #   user      => $user,
+  #   isMaster  => $isMaster,
+  #   require   => Class['hbase::configure']
+  # }
 
 }

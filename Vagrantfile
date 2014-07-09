@@ -44,6 +44,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # The nodes are placed at 192.168.66.7*
       node.vm.network :private_network, ip: zookeeperBaseIp + index.to_s
 
+      externalPort = '2421' + index.to_s
+
+      node.vm.network :forwarded_port, guest: 2181, host: externalPort.to_i
+
       # The nodes are called zookeeper-*.cluster.lab
       node.vm.hostname = 'zookeeper-' + index.to_s + baseName
 
@@ -69,15 +73,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :master, primary: true do |master|
     # The master is placed at 192.168.66.60
     master.vm.network 'private_network', ip: hadoopBaseIp + '0'
-    # NameNode
+    # NameNode UI
     master.vm.network :forwarded_port, guest: 50070, host: 24200
-    # Resource Manager
+    # Resource Manager UI
     master.vm.network :forwarded_port, guest: 8088, host: 24201
-    # MapReduce JobHistory Server
+    # MapReduce JobHistory UI
     master.vm.network :forwarded_port, guest: 19888, host: 24202
-    # HBase Master
+    # HBase Master UI
     master.vm.network :forwarded_port, guest: 6010, host: 24203
-
+    # HBase Master Server
+    master.vm.network :forwarded_port, guest: 60000, host: 24204
     # The master is called master.cluster.lab
     master.vm.hostname = 'master' + baseName
 
@@ -114,6 +119,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # The slaves are placed at 192.168.66.6*
       node.vm.network :private_network, ip: hadoopBaseIp + index.to_s
 
+      externalPort = '2422' + index.to_s
+
+      node.vm.network :forwarded_port, guest: 60030, host: externalPort.to_i
+
       # The slaves are called slave-*.cluster.lab
       node.vm.hostname = 'slave-' + index.to_s + baseName
 
@@ -137,5 +146,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
     end
   end
+
+  master.vm.provision 'shell', inline: 'sudo su - ' + user + ';cd /home/' + user + '/hbase;./bin/start-hbase.sh'
 
 end

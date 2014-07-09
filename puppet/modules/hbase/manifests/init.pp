@@ -14,7 +14,7 @@ class hbase ($user, $isMaster, $version, $shareFolder, $zookeeperEnsembleSize, $
     require               => Class['hbase::install']
   }
 
-  class { 'hadoop::start':
+  class { 'hbase::start':
     user      => $user,
     isMaster  => $isMaster,
     require   => Class['hbase::configure']

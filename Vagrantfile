@@ -147,6 +147,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  master.vm.provision 'shell', inline: 'sudo su - ' + user + ';cd /home/' + user + '/hbase;./bin/start-hbase.sh'
-
 end

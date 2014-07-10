@@ -16,6 +16,7 @@ class hbase::install($user, $version, $shareFolder) {
     command   => "wget ${protocol}://${domain}${path}${archive}",
     cwd       => $shareFolder,
     logoutput => true,
+    user      => 'root',
     timeout   => 1800, # 30 minutes `should be more than enough`,
     onlyif    => "test ! -f ${$shareFolder}/${archive}"
   }

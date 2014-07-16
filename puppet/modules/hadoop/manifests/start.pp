@@ -37,6 +37,12 @@ class hadoop::start($user, $isMaster) {
       command => "${jhDaemon} start historyserver",
       require => Exec['start resourcemanager']
     }
+
+    cron { 'start hadoop on master':
+      user  => $user,
+      special => 'reboot',
+      command => "${hadoopDaemon} --script hdfs start namenode && ${yarnDaemon} start resourcemanager && ${jhDaemon} start historyserver"
+    }
   }
 
   if !$isMaster {
@@ -47,6 +53,12 @@ class hadoop::start($user, $isMaster) {
     exec { 'start nodemanager':
       command => "${yarnDaemon} start nodemanager",
       require => Exec['start datanode']
+    }
+
+    cron { 'start hadoop on slave':
+      user  => $user,
+      special => 'reboot',
+      command => "${hadoopDaemon} --script hdfs start datanode && ${yarnDaemon} start nodemanager"
     }
   }
 

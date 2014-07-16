@@ -19,4 +19,10 @@ class zookeeper::start($user) {
     cwd    => "/home/${user}/zookeeper/bin"
   }
 
+  cron { 'start zookeeper on boot':
+    user  => $user,
+    special => 'reboot',
+    command => "cd /home/${user}/zookeeper/bin && /home/${user}/zookeeper/bin/zkServer.sh start"
+  }
+
 }

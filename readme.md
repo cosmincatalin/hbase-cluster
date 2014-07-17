@@ -26,7 +26,7 @@ You'll need about **8 GB of RAM** in the default configuration. 7 virtual machin
 * Download the configuration by issuing `git clone git@github.com:cosmincatalin/hbase-cluster.git`.
 * Go into the **hbase-cluster** directory.
 * Issue the magical `vagrant up`
-* Go make yourself a tea, it can take anywhere between 10 minutes to 40 minutes, depending on your internet connection speed.
+* Go make yourself a tea, it can take anywhere between 15 minutes to 40 minutes, depending on your internet connection speed.
 * Cluster is ready waiting for something to do.
 
 ## The long story

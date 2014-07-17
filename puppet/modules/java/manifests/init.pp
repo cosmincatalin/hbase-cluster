@@ -4,7 +4,7 @@ class java ($user, $shareFolder) {
   $protocol = 'http'
   $domain = 'download.oracle.com/'
   $path = "/otn-pub/java/jdk/7u65-b17/"
-  $archive = "jdk-7u65-linux-x64.tar.gz"
+  $archive = "jdk-7u65-linux-i586.tar.gz"
   $header = '--header "Cookie: oraclelicense=accept-securebackup-cookie"'
   $javaHome = '$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")'
 
@@ -18,7 +18,6 @@ class java ($user, $shareFolder) {
     exec { 'download java-7u65-b17':
       command   => "wget ${header} ${protocol}://${domain}${path}${archive}",
       cwd       => $shareFolder,
-      logoutput => true,
       timeout   => 1800, # 30 minutes `should be more than enough`,
       onlyif    => "test ! -f ${$shareFolder}/${archive}"
     }

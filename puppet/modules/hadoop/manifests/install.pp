@@ -14,7 +14,6 @@ class hadoop::install($user, $version, $shareFolder) {
   exec { "download hadoop-${version}":
     command   => "wget ${protocol}://${domain}${path}${file}",
     cwd       => $shareFolder,
-    logoutput => true,
     user      => 'root',
     timeout   => 1800, # 30 minutes `should be more than enough`,
     onlyif    => "test ! -f ${$shareFolder}/${file}"

@@ -14,6 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   zookeeperVersion = '3.4.6'
   # The HBase version
   hbaseVersion = '0.98.3'
+  # Phoenix version
+  phoenixVersion = '4.0.0'
   # The cluster will be raised on a private network form the non-addressable set
   baseIp = '192.168.66.'
   # The Hadoop base ip
@@ -105,7 +107,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         'hadoop_cluster_size'     => hadoopClusterSize,
         'zookeeper_ensemble_size' => zookeeperEnsembleSize,
         'hadoop_base_ip'          => hadoopBaseIp,
-        'zookeeper_base_ip'       => zookeeperBaseIp
+        'zookeeper_base_ip'       => zookeeperBaseIp,
+        'phoenix_version'         => phoenixVersion
       }
     end
   end
@@ -141,7 +144,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           'hadoop_cluster_size'     => hadoopClusterSize,
           'zookeeper_ensemble_size' => zookeeperEnsembleSize,
           'hadoop_base_ip'          => hadoopBaseIp,
-          'zookeeper_base_ip'       => zookeeperBaseIp
+          'zookeeper_base_ip'       => zookeeperBaseIp,
+          'phoenix_version'         => phoenixVersion
         }
       end
     end

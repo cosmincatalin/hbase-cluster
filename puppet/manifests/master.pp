@@ -77,3 +77,10 @@ class { 'hbase':
   zookeeperEnsembleSize => $zookeeper_ensemble_size,
   require               => Class['hadoop']
 }
+
+class { 'phoenix':
+  user                  => $user,
+  version               => $phoenix_version,
+  shareFolder           => $share_path,
+  require               => Class['hbase']
+}

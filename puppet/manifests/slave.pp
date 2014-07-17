@@ -40,8 +40,9 @@ ssh::config{ 'login for slaves':
 }
 
 class { 'java':
-  user    => $user,
-  require => Identity::User::Add["Add user ${user}"]
+  user        => $user,
+  shareFolder => $share_path,
+  require     => Identity::User::Add["Add user ${user}"]
 }
 
 class { 'hadoop':

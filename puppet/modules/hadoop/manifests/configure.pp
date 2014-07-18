@@ -69,7 +69,9 @@ class hadoop::configure($user) {
       "${propPath}[last()+1]/name/#text 'yarn.resourcemanager.webapp.address'",
       "${propPath}[last()]/value/#text '0.0.0.0:8088'",
       "${propPath}[last()+1]/name/#text 'yarn.resourcemanager.admin.address'",
-      "${propPath}[last()]/value/#text '0.0.0.0:8033'"
+      "${propPath}[last()]/value/#text '0.0.0.0:8033'",
+      "${propPath}[last()+1]/name/#text 'yarn.nodemanager.aux-services'",
+      "${propPath}[last()]/value/#text 'mapreduce_shuffle'"
     ]
   }
 

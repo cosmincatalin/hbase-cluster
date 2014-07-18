@@ -54,6 +54,14 @@ The cluster exposes three web applications that can help when working with Hadoo
 * Job History Manager - [http://localhost:24202](http://localhost:24202)
 * HBase master - [http://localhost:24203](http://localhost:24203)
 
+##### What's included
+
+* Hadoop 2.4.0
+* Zookeeper 3.4.6
+* HBase 0.98.3
+* Phoenix 4.0.0
+* Sqoop 1.4.4
+
 ##### Feedback
 
-Please don't hesistate to provide feedback. This cluster will soon be enlarged with the likes of **Zookeeper**, **Hbase**, **Sqoop**, etc.
+Please don't hesistate to provide feedback.

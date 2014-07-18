@@ -73,11 +73,11 @@ class hadoop::configure($user) {
     ]
   }
 
-  file { "${hbaseConfDir}/mapred-site.xml":
-    path    => "${hbaseConfDir}/mapred-site.xml",
+  file { "${hadoopConfDir}/mapred-site.xml":
+    path    => "${hadoopConfDir}/mapred-site.xml",
     owner   => $user,
     group   => 'hadoop',
-    mode    => '0755',
+    mode    => '0644',
     content => template('hadoop/mapred-site.xml.erb')
   }
 

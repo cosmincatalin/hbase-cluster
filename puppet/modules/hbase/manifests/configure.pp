@@ -49,7 +49,7 @@ class hbase::configure($user, $zookeeperEnsembleSize, $hadoopClusterSize) {
     path    => "${hbaseConfDir}/hbase-site.xml",
     owner   => $user,
     group   => 'hadoop',
-    mode    => '0755',
+    mode    => '0644',
     content => template('hbase/hbase-site.xml.erb')
   }
 

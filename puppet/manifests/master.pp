@@ -62,7 +62,7 @@ class { 'hadoop':
   isMaster    => true,
   version     => $hadoop_version,
   shareFolder => $share_path,
-  require   => [
+  require     => [
     Class['java'],
     Identity::User::Add["Add user ${user}"]
   ]
@@ -83,4 +83,11 @@ class { 'phoenix':
   version               => $phoenix_version,
   shareFolder           => $share_path,
   require               => Class['hbase']
+}
+
+class { 'sqoop':
+  user        => $user,
+  version     => $sqoop_version,
+  shareFolder => $share_path,
+  require     => Class['hbase']
 }

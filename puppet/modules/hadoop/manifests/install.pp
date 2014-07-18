@@ -32,4 +32,14 @@ class hadoop::install($user, $version, $shareFolder) {
     require => Exec["extract hadoop-${version}"]
   }
 
+  exec { "add HADOOP_COMMON_HOME to ${user} profile":
+    command => "echo 'export HADOOP_COMMON_HOME=/home/${user}/hadoop' >> /home/${user}/.bashrc",
+    require => File["/home/${user}/hadoop"]
+  }
+
+  exec { "add HADOOP_MAPRED_HOME to ${user} profile":
+    command => "echo 'export HADOOP_MAPRED_HOME=/home/${user}/hadoop' >> /home/${user}/.bashrc",
+    require => File["/home/${user}/hadoop"]
+  }
+
 }

@@ -15,7 +15,6 @@ define identity::user::add ($user, $group) {
     }
 
     file { "/home/${user}":
-      recurse => true,
       owner   => $user,
       group   => $group,
       require => User[$user]

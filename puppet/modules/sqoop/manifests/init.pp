@@ -7,4 +7,9 @@ class sqoop ($user, $shareFolder, $version) {
       shareFolder => $shareFolder
     }
 
+    class { 'sqoop::jdbcs':
+      user    => $user,
+      require => Class['sqoop::install']
+    }
+
 }

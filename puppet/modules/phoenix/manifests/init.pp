@@ -6,4 +6,9 @@ class phoenix ($user, $version, $shareFolder) {
     version     => $version,
     shareFolder => $shareFolder
   }
+
+  class { 'phoenix::configure':
+    user    => $user,
+    require => Class['phoenix::install']
+  }
 }

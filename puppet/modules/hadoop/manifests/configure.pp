@@ -23,7 +23,7 @@ class hadoop::configure($user) {
 
   exec { 'Add JAVA_HOME to hadoop-env.sh':
     command => "sed -i 's/\${JAVA_HOME}/${javaHome}/' hadoop-env.sh",
-    cwd     => "/home/${user}/hadoop/etc/hadoop"
+    cwd     => $hadoopConfDir
   }
 
   exec { 'truncate slaves first':
@@ -37,7 +37,7 @@ class hadoop::configure($user) {
   }
 
   augeas { 'core-site':
-    incl    => "/home/${user}/hadoop/etc/hadoop/core-site.xml",
+    incl    => "${hadoopConfDir}/core-site.xml",
     lens    => 'Xml.lns',
     changes => [
       "${propPath}[last()+1]/name/#text 'fs.defaultFS'",
@@ -48,7 +48,7 @@ class hadoop::configure($user) {
   }
 
   augeas { 'hdfs-site':
-    incl    => "/home/${user}/hadoop/etc/hadoop/hdfs-site.xml",
+    incl    => "${hadoopConfDir}/hdfs-site.xml",
     lens    => 'Xml.lns',
     changes => [
       "${propPath}[last()+1]/name/#text 'dfs.replication'",
@@ -61,7 +61,7 @@ class hadoop::configure($user) {
   }
 
   augeas { 'yarn-site':
-    incl    => "/home/${user}/hadoop/etc/hadoop/yarn-site.xml",
+    incl    => "${hadoopConfDir}/yarn-site.xml",
     lens    => 'Xml.lns',
     changes => [
       "${propPath}[last()+1]/name/#text 'yarn.resourcemanager.hostname'",
@@ -71,5 +71,21 @@ class hadoop::configure($user) {
       "${propPath}[last()+1]/name/#text 'yarn.resourcemanager.admin.address'",
       "${propPath}[last()]/value/#text '0.0.0.0:8033'"
     ]
+  }
+
+  file { "${hbaseConfDir}/mapred-site.xml":
+    path    => "${hbaseConfDir}/mapred-site.xml",
+    owner   => $user,
+    group   => 'hadoop',
+    mode    => '0755',
+    content => template('hadoop/mapred-site.xml.erb')
+  }
+
+  exec { "add HADOOP_COMMON_HOME to ${user} profile":
+    command => "echo 'export HADOOP_COMMON_HOME=/home/${user}/hadoop' >> /home/${user}/.bashrc"
+  }
+
+  exec { "add HADOOP_MAPRED_HOME to ${user} profile":
+    command => "echo 'export HADOOP_MAPRED_HOME=/home/${user}/hadoop' >> /home/${user}/.bashrc"
   }
 }

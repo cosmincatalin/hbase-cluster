@@ -52,4 +52,8 @@ class hbase::configure($user, $zookeeperEnsembleSize, $hadoopClusterSize) {
     mode    => '0755',
     content => template('hbase/hbase-site.xml.erb')
   }
+
+  exec { "add HBASE_HOME to ${user} profile":
+    command => "echo 'export HBASE_HOME=/home/${user}/hbase' >> /home/${user}/.bashrc"
+  }
 }

@@ -33,9 +33,4 @@ class hbase::install($user, $version, $shareFolder) {
     require => Exec["extract hbase-${version}"]
   }
 
-  exec { "add HBASE_HOME to ${user} profile":
-    command => "echo 'export HBASE_HOME=/home/${user}/hbase' >> /home/${user}/.bashrc",
-    require => File["/home/${user}/hbase"]
-  }
-
 }

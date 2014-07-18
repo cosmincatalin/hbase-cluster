@@ -12,4 +12,9 @@ class sqoop ($user, $shareFolder, $version) {
       require => Class['sqoop::install']
     }
 
+    class { 'sqoop::configure':
+      user    => $user,
+      require => Class['sqoop::install']
+    }
+
 }

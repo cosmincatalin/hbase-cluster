@@ -1,10 +1,10 @@
-# Install sqoop by downloading it, extracting it and linking it
-class sqoop::install($user, $version, $shareFolder) {
+# Install Hive by downloading it, extracting it and linking it
+class hive::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
   $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/sqoop/${version}/"
-  $file = "sqoop-${version}.bin__hadoop-2.0.4-alpha"
+  $path = "/apache/hive/hive-${version}/"
+  $file = "apache-hive-${version}-bin"
   $archive = "${file}.tar.gz"
 
   Exec {
@@ -12,25 +12,25 @@ class sqoop::install($user, $version, $shareFolder) {
     user  => $user
   }
 
-  exec { "download sqoop-${version}":
+  exec { "download hive-${version}":
     command   => "wget ${protocol}://${domain}${path}${archive}",
     cwd       => $shareFolder,
     user      => 'root',
-    timeout   => 1800, # 30 minutes `should be more than enough`
+    timeout   => 1800, # 30 minutes `should be more than enough`,
     onlyif    => "test ! -f ${$shareFolder}/${archive}"
   }
 
-  exec { "extract sqoop-${version}":
+  exec { "extract hive-${version}":
     command => "tar -xvf ${archive} -C /home/${user}",
     cwd     => $shareFolder,
-    require => Exec["download sqoop-${version}"]
+    require => Exec["download hive-${version}"]
   }
 
-  file { "/home/${user}/sqoop":
+  file { "/home/${user}/hive":
     ensure  => 'link',
     target  => "/home/${user}/${file}",
     owner   => $user,
-    require => Exec["extract sqoop-${version}"]
+    require => Exec["extract hive-${version}"]
   }
 
 }

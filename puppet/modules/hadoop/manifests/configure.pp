@@ -87,6 +87,10 @@ class hadoop::configure($user) {
     command => "echo 'export HADOOP_COMMON_HOME=/home/${user}/hadoop' >> /home/${user}/.bashrc"
   }
 
+  exec { "add HADOOP_HOME to ${user} profile":
+    command => "echo 'export HADOOP_HOME=/home/${user}/hadoop' >> /home/${user}/.bashrc"
+  }
+
   exec { "add HADOOP_MAPRED_HOME to ${user} profile":
     command => "echo 'export HADOOP_MAPRED_HOME=/home/${user}/hadoop' >> /home/${user}/.bashrc"
   }

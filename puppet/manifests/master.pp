@@ -91,3 +91,10 @@ class { 'sqoop':
   shareFolder => $share_path,
   require     => Class['hbase']
 }
+
+class { 'hive':
+  user        => $user,
+  version     => $hive_version,
+  shareFolder => $share_path,
+  require     => Class['hbase']
+}

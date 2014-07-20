@@ -18,6 +18,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   phoenixVersion = '4.0.0'
   # The Sqoop version
   sqoopVersion = '1.4.4'
+  # The Hive version
+  hiveVersion = '0.13.1'
   # The cluster will be raised on a private network form the non-addressable set
   baseIp = '192.168.66.'
   # The Hadoop base ip
@@ -111,7 +113,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         'hadoop_base_ip'          => hadoopBaseIp,
         'zookeeper_base_ip'       => zookeeperBaseIp,
         'phoenix_version'         => phoenixVersion,
-        'sqoop_version'           => sqoopVersion
+        'sqoop_version'           => sqoopVersion,
+        'hive_version'            => hiveVersion
       }
     end
   end

@@ -61,6 +61,7 @@ The cluster exposes three web applications that can help when working with Hadoo
 * HBase 0.98.3
 * Phoenix 4.0.0
 * Sqoop 1.4.4
+* Hive 0.13.1
 
 ##### Feedback
 

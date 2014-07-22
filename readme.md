@@ -1,24 +1,8 @@
 ## Launch an HBase cluster on your own workstation
 
-> **HBase 0.98.3** fully **distributed cluster** with **only 3 dependencies**
-
-## What's included
-
-
-![Hadoop logo](http://upload.wikimedia.org/wikipedia/commons/0/0e/Hadoop_logo.svg)
 ![Hbase logo](http://archive.cloudera.com/cdh4/cdh/4/hbase-0.94.2-cdh4.2.0/images/hbase_logo.png)
-![Phoenix logo](https://camo.githubusercontent.com/a5df2809ea1d2fb8d5f6ea75693d1db9afb291f0/687474703a2f2f666f726365646f74636f6d2e6769746875622e636f6d2f70686f656e69782f696d616765732f6c6f676f2e6a7067)
-![Sqoop logo](http://sqoop.apache.org/images/sqoop-logo.png)
 
-![Hive logo](http://hive.apache.org/images/hive_logo_medium.jpg)
-![Zookeeper logo](https://svn.apache.org/repos/asf/zookeeper/logo/zookeeper.jpg)
-
-* Hadoop 2.4.0
-* HBase 0.98.3
-* Zookeeper 3.4.6
-* Phoenix 4.0.0
-* Sqoop 1.4.4
-* Hive 0.13.1
+> **HBase 0.98.3** fully **distributed cluster** with **only 3 dependencies**
 
 ## Overview
 
@@ -69,6 +53,15 @@ The cluster exposes three web applications that can help when working with Hadoo
 * Task Manager - [http://localhost:24201](http://localhost:24201)
 * Job History Manager - [http://localhost:24202](http://localhost:24202)
 * HBase master - [http://localhost:24203](http://localhost:24203)
+
+##### What's included
+
+* Hadoop 2.4.0
+* Zookeeper 3.4.6
+* HBase 0.98.3
+* Phoenix 4.0.0
+* Sqoop 1.4.4
+* Hive 0.13.1
 
 ##### Feedback
 

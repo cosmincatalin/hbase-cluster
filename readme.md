@@ -27,7 +27,9 @@ You'll need about **8 GB of RAM** in the default configuration. 7 virtual machin
 * Go into the **hbase-cluster** directory.
 * Issue the magical `vagrant up`
 * Go make yourself a tea, it can take anywhere between 15 minutes to 40 minutes, depending on your internet connection speed.
-* Cluster is ready waiting for something to do.
+* Log in the master `vagrant ssh`
+* Log in as the base hduser `sudo su - hduser`
+* Start HBase `./hbase/bin/start-hbase.sh`
 
 ## The long story
 

@@ -55,6 +55,21 @@ The cluster exposes three web applications that can help when working with Hadoo
 * Task Manager - [http://localhost:24201](http://localhost:24201)
 * Job History Manager - [http://localhost:24202](http://localhost:24202)
 * HBase master - [http://localhost:24203](http://localhost:24203)
+ 
+##### Working with the cluster
+
+If you actually want to work with the cluster from outside its environment (Eg: run an HBase enabled Java application from your host, connect to Phoenix via JDBC etc.) you will nedd to configure your `hosts` configuration file.
+
+```
+192.168.66.71   zookeeper-1
+192.168.66.71   zookeeper-2
+192.168.66.71   zookeeper-3
+192.168.66.60   master
+192.168.66.61   slave-1
+192.168.66.62   slave-2
+192.168.66.63   slave-3
+```
+
 
 ##### What's included
 

@@ -1,16 +1,23 @@
-# Install sqoop jdbcs
-class sqoop::jdbcs($user) {
+# Install sqoop jdbc jar files
+class sqoop::jdbcs($user, $shareFolder) {
 
-  $jdbcs = [
-    'http://jdbc.postgresql.org/download/postgresql-9.3-1102.jdbc41.jar'
-  ]
+  $postgreSqlJar = 'postgresql-9.3-1102.jdbc41.jar'
+  $postgreSqlUrl = 'http://jdbc.postgresql.org/download/'
 
-  exec { $jdbcs:
-    command   => "wget ${jdbcs}",
+  exec { 'Download PostgreSQL JDBC':
+    command   => "wget ${postgreSqlUrl}${postgreSqlJar}",
     path      => '/bin:/usr/bin:/sbin',
-    user      => $user,
-    cwd       => "/home/${user}/sqoop/lib",
+    user      => 'root',
+    cwd       => $shareFolder,
+    onlyif    => "test ! -f ${$shareFolder}/${postgreSqlJar}",
     timeout   => 1800 # 30 minutes `should be more than enough`
+  }
+
+  exec { 'Copy jdbc jar files':
+    command => "cp *jdbc*.jar /home/${user}/sqoop/lib",
+    cwd     => $shareFolder,
+    path    => '/bin:/usr/bin:/sbin',
+    require => Exec['Download PostgreSQL JDBC']
   }
 
 }

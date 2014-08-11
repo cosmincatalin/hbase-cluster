@@ -98,3 +98,10 @@ class { 'hive':
   shareFolder => $share_path,
   require     => Class['hbase']
 }
+
+class { 'pig':
+  user        => $user,
+  version     => $pig_version,
+  shareFolder => $share_path,
+  require     => Class['hbase']
+}

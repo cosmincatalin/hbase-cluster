@@ -26,8 +26,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   hadoopBaseIp = baseIp + '6'
   # The Zookeeper base ip
   zookeeperBaseIp = baseIp + '7'
-  # The postfix for the machines on the cluster
-  baseName = '.cluster.lab'
   # The path where files are shared between machines
   sharePath = '/mnt/vshare'
   # The file name of the shared master key
@@ -55,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.network :forwarded_port, guest: 2181, host: externalPort.to_i
 
       # The nodes are called zookeeper-*.cluster.lab
-      node.vm.hostname = 'zookeeper-' + index.to_s + baseName
+      node.vm.hostname = 'zookeeper-' + index.to_s
 
       # start the actual provisioning
       node.vm.provision :puppet do |puppet|
@@ -90,7 +88,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # HBase Master Server
     master.vm.network :forwarded_port, guest: 60000, host: 24204
     # The master is called master.cluster.lab
-    master.vm.hostname = 'master' + baseName
+    master.vm.hostname = 'master'
 
     master.vm.provider "virtualbox" do |v|
       v.memory = 2048
@@ -133,7 +131,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.network :forwarded_port, guest: 60030, host: externalPort.to_i
 
       # The slaves are called slave-*.cluster.lab
-      node.vm.hostname = 'slave-' + index.to_s + baseName
+      node.vm.hostname = 'slave-' + index.to_s
 
       # start the actual provisioning
       node.vm.provision :puppet do |puppet|

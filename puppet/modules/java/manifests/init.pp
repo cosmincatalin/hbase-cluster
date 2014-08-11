@@ -52,6 +52,11 @@ class java ($user, $shareFolder) {
       require => Exec['rename java-7u65-b17']
     }
 
+    exec { 'install jps':
+      command => 'update-alternatives --install /usr/bin/jps jps /usr/lib/jvm/java-7-oracle/bin/jps 100',
+      require => Exec['rename java-7u65-b17']
+    }
+
     exec { "add JAVA_HOME to ${user} profile":
       command => "echo 'export JAVA_HOME=${javaHome}' >> /home/${user}/.bashrc",
       require => Exec[

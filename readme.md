@@ -4,6 +4,10 @@
 
 > **HBase 0.98.3** fully **distributed cluster** with **only 3 dependencies**
 
+## Wiki
+
+A wiki of this project can be found at [HBase Wiki](https://github.com/cosmincatalin/hbase-cluster/wiki)
+
 ## Overview
 
 Use this ready-made cluster as your starting point to experimenting with HBase 0.98.3. You have total freedom in modifying it to match your needs while having a solid foundation to start with.

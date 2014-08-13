@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Hbase-cluster by cosmincatalin</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Hbase-cluster</h1>
+        <p>Ready-made HBase cluster</p>
+        <p class="view"><a href="https://github.com/cosmincatalin/hbase-cluster">View the Project on GitHub <small>cosmincatalin/hbase-cluster</small></a></p>
+        <ul>
+          <li><a href="https://github.com/cosmincatalin/hbase-cluster/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/cosmincatalin/hbase-cluster/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/cosmincatalin/hbase-cluster">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="launch-an-hbase-cluster-on-your-own-workstation" class="anchor" href="#launch-an-hbase-cluster-on-your-own-workstation"><span class="octicon octicon-link"></span></a>Launch an HBase cluster on your own workstation</h2>
+
+<p><img src="http://archive.cloudera.com/cdh4/cdh/4/hbase-0.94.2-cdh4.2.0/images/hbase_logo.png" alt="Hbase logo"></p>
+
+<blockquote>
+<p><strong>HBase 0.98.3</strong> fully <strong>distributed cluster</strong> with <strong>only 3 dependencies</strong></p>
+</blockquote>
+
+<h2>
+<a name="wiki" class="anchor" href="#wiki"><span class="octicon octicon-link"></span></a>Wiki</h2>
+
+<p>A wiki of this project can be found at <a href="https://github.com/cosmincatalin/hbase-cluster/wiki">HBase Wiki</a></p>
+
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>Use this ready-made cluster as your starting point to experimenting with HBase 0.98.3. You have total freedom in modifying it to match your needs while having a solid foundation to start with.</p>
+
+<h2>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h2>
+
+<p>You'll need about <strong>8 GB of RAM</strong> in the default configuration. 7 virtual machines will be created. The cluster was tested on <strong>Linux</strong>, <strong>Mac OS</strong> and <strong>Windows</strong>.</p>
+
+<h5>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h5>
+
+<ol>
+<li><a href="http://www.vagrantup.com/downloads.html">Vagrant</a></li>
+<li><a href="http://git-scm.com/downloads">Git</a></li>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a></li>
+</ol><p><em>Virtualization needs to be enabled in BIOS. You probably have this enabled, but if things go awry, this might be the problem.</em></p>
+
+<h5>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h5>
+
+<ul>
+<li>Open a new terminal.</li>
+<li>Download the configuration by issuing <code>git clone git@github.com:cosmincatalin/hbase-cluster.git</code> (or <code>git clone https://github.com/cosmincatalin/hbase-cluster.git</code> if you don't have an ssh agent running).</li>
+<li>Go into the <strong>hbase-cluster</strong> directory.</li>
+<li>Issue the magical <code>vagrant up</code>
+</li>
+<li>Go make yourself a tea, it can take anywhere between 15 minutes to 40 minutes, depending on your internet connection speed.</li>
+<li>Log in the master <code>vagrant ssh</code>
+</li>
+<li>Log in as the base hduser <code>sudo su - hduser</code>
+</li>
+<li>Start HBase <code>./hbase/bin/start-hbase.sh</code>
+</li>
+</ul><h2>
+<a name="the-long-story" class="anchor" href="#the-long-story"><span class="octicon octicon-link"></span></a>The long story</h2>
+
+<p>For whomever wants to understand what actually goes on behind the scenes, here is an explanation of the software stack and the architecture of which the Hadoop cluster is made of.</p>
+
+<h5>
+<a name="virtualbox" class="anchor" href="#virtualbox"><span class="octicon octicon-link"></span></a>VirtualBox</h5>
+
+<p>VirtualBox is a popular software package used for creating virtual machines. It is <strong>free to use</strong> and exposes an API for working with it. VirtualBox is the foundation of the Hadoop cluster.</p>
+
+<h5>
+<a name="vagrant" class="anchor" href="#vagrant"><span class="octicon octicon-link"></span></a>Vagrant</h5>
+
+<p>Vagrant is an utility that leverages the API of VirtualBox for the creation of virtual machines. Vagrant can be plugged in with different <em>provisioners</em> that configure the virtual machines.</p>
+
+<h5>
+<a name="puppet" class="anchor" href="#puppet"><span class="octicon octicon-link"></span></a>Puppet</h5>
+
+<p>Enter Puppet, which is currently the de-facto industry standard for system configuration automation. Vagrant uses the power of Puppet to configure the Hadoop cluster. Puppet is a <strong>Ruby DSL</strong>.</p>
+
+<h5>
+<a name="web-apps" class="anchor" href="#web-apps"><span class="octicon octicon-link"></span></a>Web Apps</h5>
+
+<p>The cluster exposes three web applications that can help when working with Hadoop and HBase:</p>
+
+<ul>
+<li>NameNode - <a href="http://localhost:24200">http://localhost:24200</a>
+</li>
+<li>Task Manager - <a href="http://localhost:24201">http://localhost:24201</a>
+</li>
+<li>Job History Manager - <a href="http://localhost:24202">http://localhost:24202</a>
+</li>
+<li>HBase master - <a href="http://localhost:24203">http://localhost:24203</a>
+</li>
+</ul><h5>
+<a name="working-with-the-cluster" class="anchor" href="#working-with-the-cluster"><span class="octicon octicon-link"></span></a>Working with the cluster</h5>
+
+<p>If you actually want to work with the cluster from outside its environment (Eg: run an HBase enabled Java application from your host, connect to Phoenix via JDBC etc.) you will nedd to configure your <code>hosts</code> configuration file.</p>
+
+<pre><code>192.168.66.71   zookeeper-1
+192.168.66.71   zookeeper-2
+192.168.66.71   zookeeper-3
+192.168.66.60   master
+192.168.66.61   slave-1
+192.168.66.62   slave-2
+192.168.66.63   slave-3
+</code></pre>
+
+<h5>
+<a name="whats-included" class="anchor" href="#whats-included"><span class="octicon octicon-link"></span></a>What's included</h5>
+
+<ul>
+<li>Hadoop 2.4.0</li>
+<li>Zookeeper 3.4.6</li>
+<li>HBase 0.98.3</li>
+<li>Phoenix 4.0.0</li>
+<li>Sqoop 1.4.4</li>
+<li>Hive 0.13.1</li>
+</ul><h5>
+<a name="feedback" class="anchor" href="#feedback"><span class="octicon octicon-link"></span></a>Feedback</h5>
+
+<p>Please don't hesistate to provide feedback.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/cosmincatalin">cosmincatalin</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-52245202-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

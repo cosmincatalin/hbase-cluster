@@ -12,6 +12,7 @@ class hive::configure($user) {
   }
 
   exec { "add HIVE_HOME/bin to ${user} profile":
-    command => "echo 'export PATH=\$PATH:\$HIVE_HOME/bin' >> /home/${user}/.bashrc"
+    command => "echo 'export PATH=\$PATH:\$HIVE_HOME/bin' >> /home/${user}/.bashrc",
+    require => Exec["add HIVE_HOME to ${user} profile"]
   }
 }

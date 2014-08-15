@@ -11,6 +11,7 @@ class pig::configure($user) {
   }
 
   exec { "add PIG_HOME/bin to ${user} profile":
-    command => "echo 'export PATH=\$PATH:\$PIG_HOME/bin' >> /home/${user}/.bashrc"
+    command => "echo 'export PATH=\$PATH:\$PIG_HOME/bin' >> /home/${user}/.bashrc",
+    require => Exec["add PIG_HOME to ${user} profile"]
   }
 }

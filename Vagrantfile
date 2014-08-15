@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # The user under which all Hadoop services will run under
   user = 'hduser'
   # The Hadoop version
-  hadoopVersion = '2.4.0'
+  hadoopVersion = '2.4.1'
   # The Zookeeper version
   zookeeperVersion = '3.4.6'
   # The HBase version

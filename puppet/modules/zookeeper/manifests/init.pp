@@ -1,4 +1,4 @@
-# Base class for coordinating setting up Hadoop on a node
+# Base class for coordinating setting up Zookeeper in an ensemble
 class zookeeper ($user, $version, $serverId, $zookeeperEnsembleSize, $shareFolder) {
 
   $zookeeperIsNotRunning = $::quorum_running != 'true'

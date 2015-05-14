@@ -2,8 +2,8 @@
 class hbase::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
-  $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/hbase/hbase-${version}/"
+  $domain = 'archive.apache.org'
+  $path = "/dist/hbase/hbase-${version}/"
   $file = "hbase-${version}-hadoop2"
   $archive = "${file}-bin.tar.gz"
 

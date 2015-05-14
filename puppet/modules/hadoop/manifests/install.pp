@@ -2,8 +2,8 @@
 class hadoop::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
-  $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/hadoop/common/hadoop-${version}/"
+  $domain = 'archive.apache.org'
+  $path = "/dist/hadoop/common/hadoop-${version}/"
   $file = "hadoop-${version}.tar.gz"
 
   Exec {

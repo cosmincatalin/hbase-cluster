@@ -2,8 +2,8 @@
 class sqoop::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
-  $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/sqoop/${version}/"
+  $domain = 'archive.apache.org'
+  $path = "/dist/sqoop/${version}/"
   $file = "sqoop-${version}.bin__hadoop-2.0.4-alpha"
   $archive = "${file}.tar.gz"
 

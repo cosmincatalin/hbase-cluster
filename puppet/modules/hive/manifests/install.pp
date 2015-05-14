@@ -2,8 +2,8 @@
 class hive::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
-  $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/hive/hive-${version}/"
+  $domain = 'archive.apache.org'
+  $path = "/hive/hive-${version}/"
   $file = "apache-hive-${version}-bin"
   $archive = "${file}.tar.gz"
 

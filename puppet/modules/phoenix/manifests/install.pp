@@ -2,8 +2,8 @@
 class phoenix::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
-  $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/incubator/phoenix/phoenix-${version}-incubating/bin/"
+  $domain = 'archive.apache.org'
+  $path = "/dist/incubator/phoenix/phoenix-${version}-incubating/bin/"
   $file = "phoenix-${version}-incubating.tar.gz"
 
   Exec {

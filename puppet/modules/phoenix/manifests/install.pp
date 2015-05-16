@@ -3,8 +3,8 @@ class phoenix::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
   $domain = 'archive.apache.org'
-  $path = "/dist/incubator/phoenix/phoenix-${version}-incubating/bin/"
-  $file = "phoenix-${version}-incubating.tar.gz"
+  $path = "/dist/phoenix/phoenix-${version}/bin/"
+  $file = "phoenix-${version}-bin.tar.gz"
 
   Exec {
     path  => '/bin:/usr/bin:/sbin',
@@ -28,7 +28,7 @@ class phoenix::install($user, $version, $shareFolder) {
 
   file { "/home/${user}/phoenix":
     ensure  => 'link',
-    target  => "/home/${user}/phoenix-${version}-incubating",
+    target  => "/home/${user}/phoenix-${version}-bin",
     owner   => $user,
     require => Exec["extract phoenix-${version}"]
   }
@@ -36,7 +36,7 @@ class phoenix::install($user, $version, $shareFolder) {
   file { "/home/${user}/hbase/lib/phoenix.jar":
     ensure  => 'link',
     force   => true,
-    target  => "/home/${user}/phoenix/common/phoenix-core-${version}-incubating.jar",
+    target  => "/home/${user}/phoenix/common/phoenix-core-${version}-bin.jar",
     owner   => $user,
     require => Exec["extract phoenix-${version}"]
   }

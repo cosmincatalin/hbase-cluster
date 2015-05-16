@@ -56,6 +56,14 @@ class { 'hadoop':
   ]
 }
 
+class { 'spark':
+  user        => $user,
+  version     => $spark_version,
+  shareFolder => $share_path,
+  clusterSize => $hadoop_cluster_size,
+  require     => Class['hadoop']
+}
+
 class { 'hbase':
   user                  => $user,
   isMaster              => false,

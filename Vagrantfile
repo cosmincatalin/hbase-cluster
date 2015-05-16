@@ -8,20 +8,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   zookeeperEnsembleSize = 3
   # The user under which all Hadoop services will run under
   user = 'hduser'
+  # The Spark version
+  sparkVersion = '1.3.1'
   # The Hadoop version
-  hadoopVersion = '2.5.0'
+  hadoopVersion = '2.6.0'
   # The Zookeeper version
   zookeeperVersion = '3.4.6'
   # The HBase version
-  hbaseVersion = '0.98.3'
+  hbaseVersion = '1.1.0'
   # Phoenix version
-  phoenixVersion = '4.0.0'
+  phoenixVersion = '4.3.1'
   # The Sqoop version
-  sqoopVersion = '1.4.5'
+  sqoopVersion = '1.99.6'
   # The Hive version
-  hiveVersion = '0.13.1'
+  hiveVersion = '1.1.0'
   # The Pig version
-  pigVersion = '0.13.0'
+  pigVersion = '0.14.0'
   # The cluster will be raised on a private network form the non-addressable set
   baseIp = '192.168.66.'
   # The Hadoop base ip
@@ -89,11 +91,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     master.vm.network :forwarded_port, guest: 6010, host: 24203
     # HBase Master Server
     master.vm.network :forwarded_port, guest: 60000, host: 24204
+    # Spark Master Server
+    master.vm.network :forwarded_port, guest: 8080, host: 24205
+    # Spark Tasks
+    master.vm.network :forwarded_port, guest: 4040, host: 24206
     # The master is called master.cluster.lab
     master.vm.hostname = 'master'
 
     master.vm.provider "virtualbox" do |v|
-      v.memory = 2048
+      v.memory = 1024
     end
 
     # start the actual provisioning of the master
@@ -106,6 +112,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         'user'                    => user,
         'hadoop_version'          => hadoopVersion,
         'hbase_version'           => hbaseVersion,
+        'spark_version'           => sparkVersion,
         'share_path'              => sharePath,
         'shared_key'              => masterKey,
         'hadoop_cluster_size'     => hadoopClusterSize,
@@ -136,6 +143,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # The slaves are called slave-*.cluster.lab
       node.vm.hostname = 'slave-' + index.to_s
 
+      node.vm.provider "virtualbox" do |v|
+        v.memory = 1024
+      end
+
       # start the actual provisioning
       node.vm.provision :puppet do |puppet|
         puppet.manifests_path = 'puppet/manifests'
@@ -145,6 +156,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.facter         = {
           'user'                    => user,
           'hadoop_version'          => hadoopVersion,
+          'spark_version'           => sparkVersion,
           'hbase_version'           => hbaseVersion,
           'share_path'              => sharePath,
           'shared_key'              => masterKey,

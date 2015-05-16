@@ -3,7 +3,7 @@ class zookeeper::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
   $domain = 'archive.apache.org'
-  $path = "/zookeeper/zookeeper-${version}/"
+  $path = "/dist/zookeeper/zookeeper-${version}/"
   $file = "zookeeper-${version}.tar.gz"
 
   Exec {

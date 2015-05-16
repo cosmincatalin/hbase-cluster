@@ -99,4 +99,12 @@ class hadoop::configure($user) {
     command => "echo 'export PATH=\$PATH:\$HADOOP_HOME/bin' >> /home/${user}/.bashrc",
     require => Exec["add HADOOP_HOME to ${user} profile"]
   }
+
+  exec { "add HADOOP_HOME/conf to ${user} profile":
+    command => "echo 'export HADOOP_CONF_DIR=\$HADOOP_HOME/conf' >> /home/${user}/.bashrc",
+    require => Exec["add HADOOP_HOME to ${user} profile"]
+  }
+
+
+
 }

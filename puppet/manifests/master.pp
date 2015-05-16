@@ -3,7 +3,8 @@ class { 'packages':
     'vim',
     'libaugeas-ruby',
     'augeas-tools',
-    'openssh-client'
+    'openssh-client',
+    'scala'
   ]
 }
 
@@ -66,6 +67,18 @@ class { 'hadoop':
     Class['java'],
     Identity::User::Add["Add user ${user}"]
   ]
+}
+
+class { 'spark':
+  user        => $user,
+  version     => $spark_version,
+  shareFolder => $share_path,
+  clusterSize => $hadoop_cluster_size,
+  require     => Class['hadoop']
+}
+
+class { 'swap':
+  sizeInMb => 1000
 }
 
 class { 'hbase':

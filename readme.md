@@ -1,4 +1,4 @@
-## Launch an HBase cluster on your own workstation
+## Launch a Big-Data cluster on your own workstation
 
 ![Hbase logo](http://archive.cloudera.com/cdh4/cdh/4/hbase-0.94.2-cdh4.2.0/images/hbase_logo.png)
 
@@ -6,15 +6,15 @@
 
 ## Wiki
 
-A wiki of this project can be found at [HBase Wiki](https://github.com/cosmincatalin/hbase-cluster/wiki)
+A wiki of this project can be found [here](https://github.com/cosmincatalin/hbase-cluster/wiki)
 
 ## Overview
 
-Use this ready-made cluster as your starting point to experimenting with HBase 0.98.3. You have total freedom in modifying it to match your needs while having a solid foundation to start with.
+Use this ready-made cluster as your starting point to experimenting with Big-Data technologies. You have total freedom in modifying it to match your needs while having a solid foundation to start with.
 
 ## Quick start
 
-You'll need about **8 GB of RAM** in the default configuration. 7 virtual machines will be created. The cluster was tested on **Linux**, **Mac OS** and **Windows**.
+You'll need about **11 GB of RAM** in the default configuration. 7 virtual machines will be created. The cluster was tested on **Linux**, **Mac OS** and **Windows**.
 
 ##### Dependencies
 

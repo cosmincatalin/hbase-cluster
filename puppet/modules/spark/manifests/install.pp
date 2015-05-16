@@ -1,18 +1,18 @@
-# Install Hive by downloading it, extracting it and linking it
-class pig::install($user, $version, $shareFolder) {
+# Install Spark by downloading it, extracting it and linking it
+class spark::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
   $domain = 'archive.apache.org'
-  $path = "/dist/pig/pig-${version}/"
-  $file = "pig-${version}"
-  $archive = "pig-${version}.tar.gz"
+  $path = "/dist/spark/spark-${version}/"
+  $file = "spark-${version}-bin-hadoop2.6"
+  $archive = "${file}.tgz"
 
   Exec {
     path  => '/bin:/usr/bin:/sbin',
     user  => $user
   }
 
-  exec { "download pig-${version}":
+  exec { "download spark-${version}":
     command   => "wget ${protocol}://${domain}${path}${archive}",
     cwd       => $shareFolder,
     user      => 'root',
@@ -20,17 +20,17 @@ class pig::install($user, $version, $shareFolder) {
     onlyif    => "test ! -f ${$shareFolder}/${archive}"
   }
 
-  exec { "extract pig-${version}":
+  exec { "extract spark-${version}":
     command => "tar -xvf ${archive} -C /home/${user}",
     cwd     => $shareFolder,
-    require => Exec["download pig-${version}"]
+    require => Exec["download spark-${version}"]
   }
 
-  file { "/home/${user}/pig":
+  file { "/home/${user}/spark":
     ensure  => 'link',
     target  => "/home/${user}/${file}",
     owner   => $user,
-    require => Exec["extract pig-${version}"]
+    require => Exec["extract spark-${version}"]
   }
 
 }

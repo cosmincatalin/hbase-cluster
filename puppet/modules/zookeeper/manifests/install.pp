@@ -2,8 +2,8 @@
 class zookeeper::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
-  $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/zookeeper/zookeeper-${version}/"
+  $domain = 'archive.apache.org'
+  $path = "/zookeeper/zookeeper-${version}/"
   $file = "zookeeper-${version}.tar.gz"
 
   Exec {

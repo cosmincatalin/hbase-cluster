@@ -2,8 +2,8 @@
 class pig::install($user, $version, $shareFolder) {
 
   $protocol = 'http'
-  $domain = 'mirrors.dotsrc.org'
-  $path = "/apache/pig/pig-${version}/"
+  $domain = 'archive.apache.org'
+  $path = "/pig/pig-${version}/"
   $file = "pig-${version}"
   $archive = "pig-${version}.tar.gz"
 
